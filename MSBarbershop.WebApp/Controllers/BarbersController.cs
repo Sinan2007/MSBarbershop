@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MSBarbershop.Data;
@@ -20,6 +21,7 @@ namespace MSBarbershop.WebApp.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Barbers
         public async Task<IActionResult> Index()
         {

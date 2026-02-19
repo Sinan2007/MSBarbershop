@@ -1,0 +1,64 @@
+﻿@using MSBarbershop.WebApp.ViewModels.Reservation
+@model CreateReservationViewModel
+
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+
+                    <h3 class="text-center mb-4 fw-bold">
+                        Book Appointment
+                    </h3>
+
+                    <form asp-action="Create" method="post">
+
+                        <div class="mb-3">
+                            <label asp-for="BarberId" class="form-label">Barber</label>
+                            <select asp-for="BarberId"
+                                    class="form-select"
+                                    asp-items="Model.Barbers">
+                            </select>
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ServiceId" class="form-label">Service</label>
+                            <select asp-for="ServiceId"
+                                    class="form-select"
+                                    asp-items="Model.Services">
+                            </select>
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Date" class="form-label"></label>
+                            <input asp-for="Date" type="date" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Time" class="form-label"></label>
+                            <input asp-for="Time" type="time" class="form-control" />
+                            <span asp-validation-for="Time" class="text-danger"></span>
+                        </div>
+
+
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark btn-lg">
+                                Confirm Reservation
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MSBarbershop.WebApp.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using MSBarbershop.Data.Entities;
 
 namespace MSBarbershop.WebApp.Controllers
 {
@@ -13,7 +16,7 @@ namespace MSBarbershop.WebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }

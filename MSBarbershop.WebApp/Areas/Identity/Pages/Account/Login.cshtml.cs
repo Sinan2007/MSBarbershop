@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MSBarbershop.Data.Entities;
+using System.Security.Claims;
 
 namespace MSBarbershop.WebApp.Areas.Identity.Pages.Account
 {
@@ -27,6 +28,7 @@ namespace MSBarbershop.WebApp.Areas.Identity.Pages.Account
         {
             _signInManager = signInManager;
             _logger = logger;
+
         }
 
         /// <summary>

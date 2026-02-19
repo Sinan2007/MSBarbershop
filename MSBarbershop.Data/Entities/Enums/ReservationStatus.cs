@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSBarbershop.Data.Entities
+namespace MSBarbershop.Data.Entities.Enums
 {
     public enum ReservationStatus
     {

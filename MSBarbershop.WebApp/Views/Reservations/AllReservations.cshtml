@@ -1,0 +1,89 @@
+﻿@using MSBarbershop.Data.Entities
+@using MSBarbershop.Data.Entities.Enums
+@model IEnumerable<Reservation>
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">All Reservations</h2>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>All Reservations</h2>
+
+        <a asp-action="Create" class="btn btn-dark">
+            + Create Reservation
+        </a>
+    </div>
+
+    <div class="card shadow-lg border-0">
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Client</th>
+                        <th>Barber</th>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.User.Email</td>
+                            <td>@item.Barber.FullName</td>
+                            <td>@item.Service.Name</td>
+                            <td>@item.Date</td>
+                            <td>@item.Time</td>
+
+                            <td>
+                                @if (item.Status == ReservationStatus.Active)
+                                {
+                                    <span class="badge bg-primary">Active</span>
+                                }
+                                else if (item.Status == ReservationStatus.Cancelled)
+                                {
+                                    <span class="badge bg-danger">Cancelled</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Completed</span>
+                                }
+                            </td>
+
+                            <td class="text-end">
+                                @if (item.Status == ReservationStatus.Active)
+                                {
+                                    <form asp-action="Complete" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button class="btn btn-sm btn-success">
+                                            Complete
+                                        </button>
+                                    </form>
+
+                                    <form asp-action="Cancel" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button class="btn btn-sm btn-outline-danger">
+                                            Cancel
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+
