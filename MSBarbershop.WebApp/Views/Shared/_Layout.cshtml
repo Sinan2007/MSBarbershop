@@ -10,37 +10,49 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3" >
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MSBarbershop.WebApp</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <div class="container">
+
+                                <!-- ЛОГО -->
+                                <a class="navbar-brand ms-auto" asp-controller="Home" asp-action="Index">
+                                    <img src="~/images/MS logo.png"
+                                         alt="MS Barbershop"
+                                         height="50"
+                                         class="d-inline-block align-text-top">
+                                </a>
+
+                            </div>
+                        </nav>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Barbers" asp-action="Index">Barbers</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Barbers" asp-action="Index">Barbers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="WorkSchedules" asp-action="Index">Schedules</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="WorkSchedules" asp-action="Index">Schedules</a>
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="AllReservations">Reservations</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Reservations" asp-action="AllReservations">Reservations</a>
                             </li>
                         }
                         else if (User.IsInRole("Customer"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="Create">Make a reservation</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Reservations" asp-action="Create">Make a reservation</a>
                             </li>
                         }
 

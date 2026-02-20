@@ -9,3 +9,11 @@
     </h1>
     <p>A place where you can leave with a fresh and good-looking haircut</p>
 </div>
+
+@* @if(User.IsInRole("Customer")){
+    <h1>Hello,Customer</h1>
+}
+else
+{
+    <h1>Get the fuck out here</h1>
+} *@

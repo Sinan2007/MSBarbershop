@@ -56,6 +56,7 @@ namespace MSBarbershop.WebApp.Controllers
                     }).ToListAsync();
             }
 
+
             return View(model);
         }
 

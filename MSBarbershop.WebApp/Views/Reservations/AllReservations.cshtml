@@ -36,7 +36,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.User.Email</td>
+                            <td>@item.User.FirstName @item.User.LastName</td>
                             <td>@item.Barber.FullName</td>
                             <td>@item.Service.Name</td>
                             <td>@item.Date</td>
