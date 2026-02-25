@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MSBarbershop.Data.Entities.Barber>
+
+@{
+    ViewData["Title"] = "Our Barbers";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Meet Our Professional Barbers</h1>
+        <p class="lead text-muted">
+            Skilled hands. Sharp vision. Perfect results.
+        </p>
+    </div>
+
+    <div class="row">
+        @foreach (var barber in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100 border-0">
+
+                    <!-- Placeholder image -->
+                    <img src="@barber.ImageUrl"
+                         class="card-img-top"
+                         alt="Barber Image">
+
+                    <div class="card-body text-center">
+                        <h4 class="card-title fw-bold">@barber.FullName</h4>
+
+                        <p class="card-text text-muted">
+                            @barber.Description
+                        </p>
+
+                        <a asp-controller="Reservations"
+                           asp-action="Create"
+                           class="btn btn-dark"
+                           asp-route-id="@barber.Id">
+                            Book with @barber.FullName
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

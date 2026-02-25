@@ -66,7 +66,8 @@ namespace MSBarbershop.WebApp.Controllers
                 FullName = model.FullName,
                 PhoneNumber = model.PhoneNumber,
                 Description = model.Description,
-                IsActive = model.IsActive
+                IsActive = model.IsActive,
+                ImageUrl= model.ImageUrl
             };
 
             _context.Barbers.Add(barber);

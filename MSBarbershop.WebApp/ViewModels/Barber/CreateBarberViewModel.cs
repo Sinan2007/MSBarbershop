@@ -16,5 +16,7 @@ namespace MSBarbershop.WebApp.ViewModels.Barber
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
+
+        public string ImageUrl { get; set; }    
     }
 }

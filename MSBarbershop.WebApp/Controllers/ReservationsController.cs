@@ -26,7 +26,7 @@ namespace MSBarbershop.WebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int? id = null)
         {
             var model = new CreateReservationViewModel
             {
@@ -56,6 +56,10 @@ namespace MSBarbershop.WebApp.Controllers
                     }).ToListAsync();
             }
 
+            if (id.HasValue)
+            {
+                model.BarberId = id.Value;
+            }
 
             return View(model);
         }

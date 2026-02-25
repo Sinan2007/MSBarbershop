@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using MSBarbershop.Data.Entities; 
+    using MSBarbershop.Data.Entities;
 
     public class ApplicationDbContext : IdentityDbContext<User>
     {
@@ -23,6 +23,9 @@
 
             builder.Entity<BarberService>()
                 .HasKey(bs => new { bs.BarberId, bs.ServiceId });
+
+            
+
         }
     }
 

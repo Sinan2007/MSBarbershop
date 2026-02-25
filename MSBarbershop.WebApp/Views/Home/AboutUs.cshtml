@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">About Us</h1>
+        <p class="lead text-muted">Where Style Meets Precision</p>
+    </div>
+
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <img src="~/images/MS logo.png" class="img-fluid rounded shadow" alt="Barbershop">
+        </div>
+
+        <div class="col-md-6">
+            <h3 class="fw-bold mb-3">Our Story</h3>
+            <p>
+                MSBarbershop was created with one simple mission – to provide premium grooming
+                services in a modern and comfortable atmosphere. We believe that a haircut
+                is not just a service, but an experience.
+            </p>
+
+            <p>
+                Our professional barbers combine classic techniques with modern trends,
+                ensuring every client leaves with confidence and style. Whether you're
+                looking for a fresh fade, a traditional cut, or a perfect beard trim –
+                we’ve got you covered.
+            </p>
+
+            <h4 class="fw-bold mt-4">Why Choose Us?</h4>
+            <ul>
+                <li>✔ Experienced and certified barbers</li>
+                <li>✔ Premium grooming products</li>
+                <li>✔ Clean and relaxing environment</li>
+                <li>✔ Easy online reservations</li>
+            </ul>
+
+            <a asp-controller="Reservations" asp-action="Create"
+               class="btn btn-dark mt-3">
+                Book an Appointment
+            </a>
+        </div>
+    </div>
+
+    <hr class="my-5" />
+
+    <div class="text-center">
+        <h3 class="fw-bold">Our Mission</h3>
+        <p class="w-75 mx-auto">
+            At MSBarbershop, our mission is to elevate men's grooming by combining
+            craftsmanship, precision, and customer care. We strive to build long-term
+            relationships with our clients and make every visit memorable.
+        </p>
+    </div>
+</div>

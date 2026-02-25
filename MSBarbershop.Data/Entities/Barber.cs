@@ -8,6 +8,7 @@ namespace MSBarbershop.Data.Entities
 {
     public class Barber
     {
+        
         public int Id { get; set; }
 
         public string FullName { get; set; }
@@ -17,6 +18,8 @@ namespace MSBarbershop.Data.Entities
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
+
+        public string ImageUrl { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }
 
