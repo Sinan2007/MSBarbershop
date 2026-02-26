@@ -37,19 +37,19 @@ namespace MSBarbershop.WebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Authorize(Roles = "Customer")]
+        //[Authorize(Roles = "Customer")]
         public IActionResult AboutUs()
         {
             return View();
         }
 
 
-[Authorize(Roles = "Customer")]
-    public async Task<IActionResult> OurBarbers()
-    {
-        var barbers = await _context.Barbers.ToListAsync();
-        return View(barbers);
-    }
+        [Authorize(Roles = "Customer")]
+         public async Task<IActionResult> OurBarbers()
+            {
+             var barbers = await _context.Barbers.ToListAsync();
+             return View(barbers);
+            }
 
 }
 }
