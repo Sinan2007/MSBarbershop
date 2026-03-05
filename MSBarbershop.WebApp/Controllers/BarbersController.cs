@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
+using MSBarbershop.Data.Entities.Enums;
 using MSBarbershop.WebApp.ViewModels.Barber;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,12 @@ namespace MSBarbershop.WebApp.Controllers
             {
                 return NotFound();
             }
+
+            var completedReservations = await _context.Reservations
+       .Where(r => r.BarberId == id && r.Status == ReservationStatus.Completed)
+       .CountAsync();
+
+            ViewBag.CompletedReservations = completedReservations;
 
             return View(barber);
         }
