@@ -14,30 +14,44 @@ namespace MSBarbershop.WebApp.Seed
         {
             new Service
             {
-            Name = "short hair haircut",
-            Description = "for people with short hair",
+            Name = "man haircut",
+            Description = "for men",
             Price = 20,
             DurationMinutes = 30
             },
             new Service
             {
-            Name = "long hair haircut",
-            Description = "for people with long hair",
-            Price = 30,
+            Name = "child haircut",
+            Description = "for children under 10 years old",
+            Price = 10,
+            DurationMinutes = 30
+            },
+            new Service
+            {
+            Name = "skin fade",
+            Description = "for people who want some style on their head",
+            Price = 25,
             DurationMinutes = 45
             },
             new Service
             {
-            Name = "short hair + beard",
-            Description = "for people with short hair and beard",
-            Price = 35,
-            DurationMinutes = 45
+            Name = "beard shaping",
+            Description = "for people with beard",
+            Price = 10,
+            DurationMinutes = 15
             },
             new Service
             {
-            Name = "long hair haircut + beard",
-            Description = "for people with long hair and beard",
+            Name = "skin fade + beard shaping",
+            Description = "for people with style and beard",
             Price = 40,
+            DurationMinutes = 60
+            },
+            new Service
+            {
+            Name = "beard/hair dying",
+            Description = "for people who want to dye their hair or beard",
+            Price = 50,
             DurationMinutes = 60
             },
         };

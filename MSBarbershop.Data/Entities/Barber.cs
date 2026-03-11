@@ -20,6 +20,9 @@ namespace MSBarbershop.Data.Entities
         public bool IsActive { get; set; }
 
         public string ImageUrl { get; set; }
+        public string? UserId { get; set; }
+        public User? User { get; set; }
+
 
         public ICollection<Reservation> Reservations { get; set; }
 

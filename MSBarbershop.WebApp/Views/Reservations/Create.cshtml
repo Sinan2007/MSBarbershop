@@ -19,6 +19,7 @@
                         <div class="mb-3">
                             <label asp-for="BarberId" class="form-label">Barber</label>
                             <select asp-for="BarberId"
+                                    id="BarberId"
                                     class="form-select"
                                     asp-items="Model.Barbers">
                             </select>
@@ -28,6 +29,7 @@
                         <div class="mb-3">
                             <label asp-for="ServiceId" class="form-label">Service</label>
                             <select asp-for="ServiceId"
+                                    id="ServiceId"
                                     class="form-select"
                                     asp-items="Model.Services">
                             </select>
@@ -36,14 +38,19 @@
 
                         <div class="mb-3">
                             <label asp-for="Date" class="form-label"></label>
-                            <input asp-for="Date" type="date" class="form-control" />
+                            <input asp-for="Date" id="Date" type="date" class="form-control" />
                             <span asp-validation-for="Date" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Time" class="form-label"></label>
-                            <input asp-for="Time" type="time" class="form-control" />
+                            <label class="form-label">Available Time</label>
+
+                            <select asp-for="Time" id="Time" class="form-select">
+                                <option>Select time</option>
+                            </select>
+
                             <span asp-validation-for="Time" class="text-danger"></span>
                         </div>
+
 
 
 
@@ -62,3 +69,46 @@
     </div>
 
 </div>
+
+@section Scripts {
+
+    <script>
+
+        function loadSlots(){
+
+            var barberId = $("#BarberId").val();
+            var serviceId = $("#ServiceId").val();
+            var date = $("#Date").val();
+
+            if(!barberId || !serviceId || !date)
+                return;
+
+            $.get("/Reservations/GetAvailableSlots", {
+                barberId: barberId,
+                serviceId: serviceId,
+                date: date
+            }, function(data){
+
+                $("#Time").empty();
+                $("#Time").append(`<option>Select time</option>`);
+
+                data.forEach(function(time){
+
+                    $("#Time").append(
+                        `<option value="${time}">${time}</option>`
+                    );
+
+                });
+
+            });
+
+        }
+
+        $("#BarberId").change(loadSlots);
+        $("#ServiceId").change(loadSlots);
+        $("#Date").change(loadSlots);
+
+    </script>
+
+}
+

@@ -24,7 +24,13 @@
             builder.Entity<BarberService>()
                 .HasKey(bs => new { bs.BarberId, bs.ServiceId });
 
-            
+            builder.Entity<Barber>()
+           .HasOne(b => b.User)
+           .WithMany()
+           .HasForeignKey(b => b.UserId)
+           .OnDelete(DeleteBehavior.NoAction);
+
+
 
         }
     }

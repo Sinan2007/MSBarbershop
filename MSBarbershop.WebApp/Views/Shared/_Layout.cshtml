@@ -12,25 +12,18 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3" >
             <div class="container-fluid">
+                <a class="navbar-brand ms-auto" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/MS logo.png"
+                         alt="MS Barbershop"
+                         height="50"
+                         class="d-inline-block align-text-top">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                            <div class="container">
-
-                                <!-- ЛОГО -->
-                                <a class="navbar-brand ms-auto" asp-controller="Home" asp-action="Index">
-                                    <img src="~/images/MS logo.png"
-                                         alt="MS Barbershop"
-                                         height="50"
-                                         class="d-inline-block align-text-top">
-                                </a>
-
-                            </div>
-                        </nav>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -57,8 +50,8 @@
                         }
                         else if (User.IsInRole("Barber"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Reservations" asp-action="AllReservations">Reservations</a>
+                             <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Reservations" asp-action="BarberReservations">My Reservations</a>
                             </li>
                         }
                         else if (User.IsInRole("Customer"))
@@ -79,7 +72,7 @@
                                         <a class="dropdown-item"
                                            asp-controller="Barbers"
                                            asp-action="Details"
-                                           asp-route-id="7">
+                                           asp-route-id="1">
                                             Ivan Ivanov
                                         </a>
                                     </li>
@@ -88,7 +81,7 @@
                                         <a class="dropdown-item"
                                            asp-controller="Barbers"
                                            asp-action="Details"
-                                           asp-route-id="8">
+                                           asp-route-id="2">
                                             Nikola Ivanov
                                         </a>
                                     </li>
