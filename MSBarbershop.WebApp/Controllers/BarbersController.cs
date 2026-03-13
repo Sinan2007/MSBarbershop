@@ -1,59 +1,42 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MSBarbershop.Data;
-using MSBarbershop.Data.Entities;
-using MSBarbershop.Data.Entities.Enums;
+using MSBarbershop.WebApp.Services.Barbers;
 using MSBarbershop.WebApp.ViewModels.Barber;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MSBarbershop.WebApp.Controllers
 {
     public class BarbersController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IBarberService _barberService;
 
-        public BarbersController(ApplicationDbContext context)
+        public BarbersController(IBarberService barberService)
         {
-            _context = context;
+            _barberService = barberService;
         }
 
         [Authorize(Roles = "Admin")]
-        // GET: Barbers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Barbers.ToListAsync());
+            var barbers = await _barberService.GetAllBarbers();
+
+            return View(barbers);
         }
 
-        // GET: Barbers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var barber = await _barberService.GetBarberById(id);
 
-            var barber = await _context.Barbers
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (barber == null)
-            {
                 return NotFound();
-            }
 
-            var completedReservations = await _context.Reservations
-       .Where(r => r.BarberId == id && r.Status == ReservationStatus.Completed)
-       .CountAsync();
+            var completedReservations =
+                await _barberService.GetCompletedReservationsCount(id);
 
             ViewBag.CompletedReservations = completedReservations;
 
             return View(barber);
         }
 
-        // GET: Barbers/Create
         public IActionResult Create()
         {
             return View();
@@ -64,32 +47,16 @@ namespace MSBarbershop.WebApp.Controllers
         public async Task<IActionResult> Create(CreateBarberViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
-            var barber = new Barber
-            {
-                FullName = model.FullName,
-                PhoneNumber = model.PhoneNumber,
-                Description = model.Description,
-                IsActive = model.IsActive,
-                ImageUrl= model.ImageUrl
-            };
-
-            _context.Barbers.Add(barber);
-            await _context.SaveChangesAsync();
+            await _barberService.CreateBarber(model);
 
             return RedirectToAction(nameof(Index));
         }
 
-
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-                return NotFound();
-
-            var barber = await _context.Barbers.FindAsync(id);
+            var barber = await _barberService.GetBarberById(id);
 
             if (barber == null)
                 return NotFound();
@@ -100,12 +67,12 @@ namespace MSBarbershop.WebApp.Controllers
                 FullName = barber.FullName,
                 PhoneNumber = barber.PhoneNumber,
                 Description = barber.Description,
-                IsActive = barber.IsActive
+                IsActive = barber.IsActive,
+                ImageUrl = barber.ImageUrl
             };
 
             return View(model);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -117,59 +84,28 @@ namespace MSBarbershop.WebApp.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var barber = await _context.Barbers.FindAsync(id);
-
-            if (barber == null)
-                return NotFound();
-
-            barber.FullName = model.FullName;
-            barber.PhoneNumber = model.PhoneNumber;
-            barber.Description = model.Description;
-            barber.IsActive = model.IsActive;
-
-            _context.Update(barber);
-            await _context.SaveChangesAsync();
+            await _barberService.UpdateBarber(model);
 
             return RedirectToAction(nameof(Index));
         }
 
-
-        // GET: Barbers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var barber = await _barberService.GetBarberById(id);
 
-            var barber = await _context.Barbers
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (barber == null)
-            {
                 return NotFound();
-            }
 
             return View(barber);
         }
 
-        // POST: Barbers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var barber = await _context.Barbers.FindAsync(id);
-            if (barber != null)
-            {
-                _context.Barbers.Remove(barber);
-            }
+            await _barberService.DeleteBarber(id);
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool BarberExists(int id)
-        {
-            return _context.Barbers.Any(e => e.Id == id);
         }
     }
 }

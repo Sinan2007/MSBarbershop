@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
 using MSBarbershop.WebApp.Seed;
+using MSBarbershop.WebApp.Services.Barbers;
+using MSBarbershop.WebApp.Services.Reservations;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +17,9 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IBarberService, BarbersService>();
 
 var app = builder.Build();
 using (var scope=app.Services.CreateScope())
@@ -52,5 +57,8 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     await DataSeeder.Initialize(services);
 }
+
+
+
 
 app.Run();
