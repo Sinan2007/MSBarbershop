@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MSBarbershop.Core.Services.Barbers;
 using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
 using MSBarbershop.WebApp.Seed;
-using MSBarbershop.WebApp.Services.Barbers;
 using MSBarbershop.WebApp.Services.Reservations;
+using MSBarbershop.WebApp.Services.WorkSchedules;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,8 +19,13 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+//Services
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IBarberService, BarbersService>();
+builder.Services.AddScoped<IWorkScheduleService, WorkScheduleService>();
+builder.Services.AddScoped<IServiceService, ServiceService>();
+
+
 
 var app = builder.Build();
 using (var scope=app.Services.CreateScope())

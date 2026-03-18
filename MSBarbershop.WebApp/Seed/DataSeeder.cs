@@ -16,6 +16,7 @@ namespace MSBarbershop.WebApp.Seed
 
             await BarberSeeder.Seed(context);
             await ServicesSeeder.Seed(context);
+            await SchedulesSeeder.Seed(context);
         }
     }
 }

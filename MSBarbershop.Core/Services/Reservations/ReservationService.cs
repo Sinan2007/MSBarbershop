@@ -155,6 +155,117 @@ namespace MSBarbershop.WebApp.Services.Reservations
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<MyReservationViewModel>> GetMyReservations(string userId)
+        {
+            return await _context.Reservations
+                .Where(r => r.UserId == userId)
+                .Include(r => r.Barber)
+                .Include(r => r.Service)
+                .Select(r => new MyReservationViewModel
+                {
+                    Id = r.Id,
+                    BarberName = r.Barber.FullName,
+                    ServiceName = r.Service.Name,
+                    Date = r.Date,
+                    Time = r.Time,
+                    Status = r.Status
+                }).OrderBy(r => r.Status != ReservationStatus.Active)
+                  .ThenBy(r => r.Date)
+                  .ThenBy(r => r.Time)
+                .ToListAsync();
+        }
+
+        public async Task<List<MyReservationViewModel>> GetUpcomingReservations(string userId)
+        {
+            var today = DateOnly.FromDateTime(DateTime.Now);
+
+            return await _context.Reservations
+                .Where(r => r.UserId == userId &&
+                       r.Status == ReservationStatus.Active &&
+                       r.Date >= today)
+                .Include(r => r.Barber)
+                .Include(r => r.Service)
+                .Select(r => new MyReservationViewModel
+                {
+                    Id = r.Id,
+                    BarberName = r.Barber.FullName,
+                    ServiceName = r.Service.Name,
+                    Date = r.Date,
+                    Time = r.Time,
+                    Status = r.Status
+                })
+                .OrderBy(r => r.Date)
+                .ThenBy(r => r.Time)
+                .ToListAsync();
+        }
+
+        public async Task<List<MyReservationViewModel>> GetPastReservations(string userId)
+        {
+            var today = DateOnly.FromDateTime(DateTime.Now);
+
+            return await _context.Reservations
+                .Where(r => r.UserId == userId &&
+                       (r.Status != ReservationStatus.Active || r.Date < today))
+                .Include(r => r.Barber)
+                .Include(r => r.Service)
+                .Select(r => new MyReservationViewModel
+                {
+                    Id = r.Id,
+                    BarberName = r.Barber.FullName,
+                    ServiceName = r.Service.Name,
+                    Date = r.Date,
+                    Time = r.Time,
+                    Status = r.Status
+                })
+                .OrderByDescending(r => r.Date)
+                .ThenByDescending(r => r.Time)
+                .ToListAsync();
+        }
+
+        public async Task<List<MyReservationViewModel>> GetBarberUpcomingReservations(int barberId)
+        {
+            return await _context.Reservations
+                .Where(r => r.BarberId == barberId && r.Status == ReservationStatus.Active)
+                .Include(r => r.Service)
+                .Include(r => r.Barber)
+                .Select(r => new MyReservationViewModel
+                {
+                    Id = r.Id,
+                    BarberName = r.Barber.FullName,
+                    ServiceName = r.Service.Name,
+                    Date = r.Date,
+                    Time = r.Time,
+                    Status = r.Status
+                })
+                .ToListAsync();
+        }
+
+
+        public async Task<List<MyReservationViewModel>> GetBarberPastReservations(int barberId)
+        {
+            return await _context.Reservations
+                .Where(r => r.BarberId == barberId &&
+                       (r.Status == ReservationStatus.Completed ||
+                        r.Status == ReservationStatus.Cancelled))
+                .Include(r => r.Service)
+                .Select(r => new MyReservationViewModel
+                {
+                    Id = r.Id,
+                    ServiceName = r.Service.Name,
+                    BarberName = r.Barber.FullName,
+                    Date = r.Date,
+                    Time = r.Time,
+                    Status = r.Status
+                })
+                .OrderByDescending(r => r.Date)
+                .ThenByDescending(r => r.Time)
+                .ToListAsync();
+        }
+
+
+
+
     }
 
 

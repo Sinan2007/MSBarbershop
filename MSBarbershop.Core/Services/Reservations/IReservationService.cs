@@ -16,6 +16,15 @@ namespace MSBarbershop.WebApp.Services.Reservations
         Task CancelReservation(int id);
 
         Task CompleteReservation(int id);
+
+        Task<List<MyReservationViewModel>> GetMyReservations(string userId);
+
+        Task<List<MyReservationViewModel>> GetPastReservations(string userId);
+        Task<List<MyReservationViewModel>> GetUpcomingReservations(string userId);
+
+        Task<List<MyReservationViewModel>> GetBarberUpcomingReservations(int barberId);
+        Task<List<MyReservationViewModel>> GetBarberPastReservations(int barberId);
+
     }
 
 }

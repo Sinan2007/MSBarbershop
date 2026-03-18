@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MSBarbershop.Core.ViewModels.Reservation;
 using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
-using MSBarbershop.Data.Entities.Enums;
 using MSBarbershop.WebApp.Services.Reservations;
 using MSBarbershop.WebApp.ViewModels.Reservation;
 using System.Security.Claims;
@@ -157,25 +157,33 @@ namespace MSBarbershop.WebApp.Controllers
 
         public async Task<IActionResult> MyReservations()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var reservations = await _reservationService
-    .GetUserReservations(user.Id);
+            var model = new MyReservationsPageViewModel
+            {
+                Upcoming = await _reservationService.GetUpcomingReservations(userId),
+                Past = await _reservationService.GetPastReservations(userId)
+            };
 
-
-            return View(reservations);
+            return View(model);
         }
+
 
 
         [Authorize(Roles = "Admin , Barber")]
         [HttpPost]
         public async Task<IActionResult> Cancel(int id)
         {
-         await _reservationService.CancelReservation(id);
+            await _reservationService.CancelReservation(id);
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction(nameof(AllReservations));
+            }
+            else
+            {
+                return RedirectToAction(nameof(BarberDashboard));
 
-         return RedirectToAction(nameof(AllReservations));
-         
-
+            }
         }
 
         [Authorize(Roles = "Admin , Barber")]
@@ -184,8 +192,14 @@ namespace MSBarbershop.WebApp.Controllers
         public async Task<IActionResult> Complete(int id)
         {
             await _reservationService.CompleteReservation(id);
-
-            return RedirectToAction(nameof(AllReservations));
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction(nameof(AllReservations));
+            }
+            else
+            {
+                return RedirectToAction(nameof(BarberDashboard));
+            }
         }
 
 
@@ -210,6 +224,35 @@ namespace MSBarbershop.WebApp.Controllers
 
             return Json(slots);
         }
+
+        public async Task<IActionResult> BarberDashboard()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var barber = await _context.Barbers
+                .FirstOrDefaultAsync(b => b.UserId == userId);
+
+            if (barber == null)
+                return NotFound();
+
+            var upcoming = await _reservationService
+                .GetBarberUpcomingReservations(barber.Id);
+
+            var past = await _reservationService
+                .GetBarberPastReservations(barber.Id);
+
+            var model = new MyReservationsPageViewModel
+            {
+                Upcoming = upcoming,
+                Past = past
+            };
+
+            return View(model);
+        }
+
+
+
+
 
 
     }

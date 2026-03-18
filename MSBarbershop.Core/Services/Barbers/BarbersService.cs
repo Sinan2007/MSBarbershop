@@ -4,7 +4,8 @@ using MSBarbershop.Data.Entities;
 using MSBarbershop.Data.Entities.Enums;
 using MSBarbershop.WebApp.ViewModels.Barber;
 
-namespace MSBarbershop.WebApp.Services.Barbers
+
+namespace MSBarbershop.Core.Services.Barbers
 {
     public class BarbersService : IBarberService
     {
@@ -53,6 +54,7 @@ namespace MSBarbershop.WebApp.Services.Barbers
 
         public async Task UpdateBarber(EditBarberViewModel model)
         {
+            ArgumentNullException.ThrowIfNull(model);
             var barber = await _context.Barbers.FindAsync(model.Id);
 
             if (barber == null)
