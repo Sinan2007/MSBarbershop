@@ -21,13 +21,24 @@ namespace MSBarbershop.WebApp.Services.Reservations
             _context = context;
         }
 
-        public async Task<List<Reservation>> GetUserReservations(string userId)
+        public async Task<List<MyReservationViewModel>> GetUserReservations(string userId)
         {
-            return await _context.Reservations
-                .Include(r => r.Barber)
-                .Include(r => r.Service)
-                .Where(r => r.UserId == userId)
-                .ToListAsync();
+            var reservations = await _context.Reservations
+    .Include(r => r.Barber)
+    .Include(r => r.Service)
+    .Where(r => r.UserId == userId)
+    .ToListAsync();
+
+            return reservations.Select(r => new MyReservationViewModel
+            {
+                Id = r.Id,
+                BarberName = r.Barber.FullName,
+                ServiceName = r.Service.Name,
+                Date = r.Date,
+                Time = r.Time,
+                EndTime = r.Time.AddMinutes(r.Service.DurationMinutes),
+                Status = r.Status
+            }).ToList();
         }
 
         public async Task<List<Reservation>> GetBarberReservations(int barberId)
@@ -36,6 +47,7 @@ namespace MSBarbershop.WebApp.Services.Reservations
                 .Include(r => r.User)
                 .Include(r => r.Service)
                 .Where(r => r.BarberId == barberId)
+
                 .ToListAsync();
         }
 
@@ -180,12 +192,15 @@ namespace MSBarbershop.WebApp.Services.Reservations
         {
             var today = DateOnly.FromDateTime(DateTime.Now);
 
-            return await _context.Reservations
+            var reservations = await _context.Reservations
                 .Where(r => r.UserId == userId &&
                        r.Status == ReservationStatus.Active &&
                        r.Date >= today)
                 .Include(r => r.Barber)
                 .Include(r => r.Service)
+                .ToListAsync();
+
+            return reservations
                 .Select(r => new MyReservationViewModel
                 {
                     Id = r.Id,
@@ -193,22 +208,26 @@ namespace MSBarbershop.WebApp.Services.Reservations
                     ServiceName = r.Service.Name,
                     Date = r.Date,
                     Time = r.Time,
+                    EndTime = r.Time.AddMinutes(r.Service.DurationMinutes),
                     Status = r.Status
                 })
                 .OrderBy(r => r.Date)
                 .ThenBy(r => r.Time)
-                .ToListAsync();
+                .ToList();
         }
 
         public async Task<List<MyReservationViewModel>> GetPastReservations(string userId)
         {
             var today = DateOnly.FromDateTime(DateTime.Now);
 
-            return await _context.Reservations
+            var reservations = await _context.Reservations
                 .Where(r => r.UserId == userId &&
                        (r.Status != ReservationStatus.Active || r.Date < today))
                 .Include(r => r.Barber)
                 .Include(r => r.Service)
+                .ToListAsync();
+
+            return reservations
                 .Select(r => new MyReservationViewModel
                 {
                     Id = r.Id,
@@ -216,54 +235,68 @@ namespace MSBarbershop.WebApp.Services.Reservations
                     ServiceName = r.Service.Name,
                     Date = r.Date,
                     Time = r.Time,
+                    EndTime = r.Time.AddMinutes(r.Service.DurationMinutes),
                     Status = r.Status
                 })
                 .OrderByDescending(r => r.Date)
                 .ThenByDescending(r => r.Time)
-                .ToListAsync();
+                .ToList();
         }
 
         public async Task<List<MyReservationViewModel>> GetBarberUpcomingReservations(int barberId)
         {
-            return await _context.Reservations
+            var reservations = await _context.Reservations
                 .Where(r => r.BarberId == barberId && r.Status == ReservationStatus.Active)
                 .Include(r => r.Service)
                 .Include(r => r.Barber)
+                .Include(r => r.User)
+                .ToListAsync();
+
+            
+
+            return reservations
                 .Select(r => new MyReservationViewModel
                 {
                     Id = r.Id,
-                    BarberName = r.Barber.FullName,
+                    BarberName = r.User.FirstName + " " + r.User.LastName,
                     ServiceName = r.Service.Name,
                     Date = r.Date,
                     Time = r.Time,
+                    EndTime = r.Time.AddMinutes(r.Service.DurationMinutes),
                     Status = r.Status
                 })
-                .ToListAsync();
+                .OrderBy(r => r.Date)
+                .ThenBy(r => r.Time)
+                .ToList();
         }
 
 
         public async Task<List<MyReservationViewModel>> GetBarberPastReservations(int barberId)
         {
-            return await _context.Reservations
+            var reservations = await _context.Reservations
                 .Where(r => r.BarberId == barberId &&
                        (r.Status == ReservationStatus.Completed ||
                         r.Status == ReservationStatus.Cancelled))
                 .Include(r => r.Service)
+                .Include(r => r.Barber)
+                .Include(r => r.User)
+                .ToListAsync();
+
+            return reservations
                 .Select(r => new MyReservationViewModel
                 {
                     Id = r.Id,
+                    BarberName = r.User.FirstName + " " + r.User.LastName,
                     ServiceName = r.Service.Name,
-                    BarberName = r.Barber.FullName,
                     Date = r.Date,
                     Time = r.Time,
+                    EndTime = r.Time.AddMinutes(r.Service.DurationMinutes),
                     Status = r.Status
                 })
                 .OrderByDescending(r => r.Date)
                 .ThenByDescending(r => r.Time)
-                .ToListAsync();
+                .ToList();
         }
-
-
 
 
     }

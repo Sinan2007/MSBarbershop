@@ -5,7 +5,7 @@ namespace MSBarbershop.WebApp.Services.Reservations
 {
     public interface IReservationService
     {
-        Task<List<Reservation>> GetUserReservations(string userId);
+        Task<List<MyReservationViewModel>> GetUserReservations(string userId);
 
         Task<List<Reservation>> GetBarberReservations(int barberId);
 
