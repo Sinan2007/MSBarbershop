@@ -2,55 +2,89 @@
     ViewData["Title"] = "About Us";
 }
 
-<div class="container mt-5">
-    <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold">About Us</h1>
-        <p class="lead text-muted">Where Style Meets Precision</p>
-    </div>
+<style>
+    .about-hero {
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/MSBarbershopHomeImage.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 100px 0;
+        color: white;
+        text-align: center;
+    }
 
-    <div class="row align-items-center">
+    .gold-text {
+        color: #d4af37;
+    }
+
+    .about-card {
+        background: #1e1e1e;
+        color: #eee;
+        border: 1px solid #333;
+        padding: 30px;
+        border-radius: 10px;
+    }
+
+        .about-card:hover {
+            border-color: #d4af37;
+            transition: 0.3s;
+        }
+</style>
+
+
+
+<div class="container">
+
+    <!-- 🔥 MAIN SECTION -->
+    <div class="row align-items-center mb-5">
+
         <div class="col-md-6">
-            <img src="~/images/MS logo.png" class="img-fluid rounded shadow" alt="Barbershop">
+            <img src="~/images/MS logo.png"
+                 class="img-fluid rounded shadow-lg"
+                 style="object-fit:cover; max-height:400px; width:100%;" />
         </div>
 
         <div class="col-md-6">
-            <h3 class="fw-bold mb-3">Our Story</h3>
-            <p>
-                MSBarbershop was created with one simple mission – to provide premium grooming
-                services in a modern and comfortable atmosphere. We believe that a haircut
-                is not just a service, but an experience.
-            </p>
+            <div class="about-card">
 
-            <p>
-                Our professional barbers combine classic techniques with modern trends,
-                ensuring every client leaves with confidence and style. Whether you're
-                looking for a fresh fade, a traditional cut, or a perfect beard trim –
-                we’ve got you covered.
-            </p>
+                <h3 class="fw-bold gold-text mb-3">Our Story</h3>
 
-            <h4 class="fw-bold mt-4">Why Choose Us?</h4>
-            <ul>
-                <li>✔ Experienced and certified barbers</li>
-                <li>✔ Premium grooming products</li>
-                <li>✔ Clean and relaxing environment</li>
-                <li>✔ Easy online reservations</li>
-            </ul>
+                <p>
+                    MSBarbershop was created with one simple mission – to provide premium grooming
+                    services in a modern and comfortable atmosphere.
+                </p>
 
-            <a asp-controller="Reservations" asp-action="Create"
-               class="btn btn-dark mt-3">
-                Book an Appointment
-            </a>
+                <p>
+                    Our barbers combine classic techniques with modern trends,
+                    ensuring every client leaves confident and fresh.
+                </p>
+
+                <h5 class="fw-bold mt-4">Why Choose Us?</h5>
+
+                <ul class="list-unstyled">
+                    <li>✔ Experienced barbers</li>
+                    <li>✔ Premium products</li>
+                    <li>✔ Relaxing atmosphere</li>
+                    <li>✔ Easy online booking</li>
+                </ul>
+
+                <a asp-controller="Reservations" asp-action="Create"
+                   class="btn btn-outline-light mt-3">
+                    Book Appointment
+                </a>
+
+            </div>
         </div>
+
     </div>
 
-    <hr class="my-5" />
+    <!-- 🔥 MISSION SECTION -->
+    <div class="text-center mt-5">
+        <h2 class="fw-bold gold-text mb-3">Our Mission</h2>
 
-    <div class="text-center">
-        <h3 class="fw-bold">Our Mission</h3>
-        <p class="w-75 mx-auto">
-            At MSBarbershop, our mission is to elevate men's grooming by combining
-            craftsmanship, precision, and customer care. We strive to build long-term
-            relationships with our clients and make every visit memorable.
+        <p class="text-muted w-75 mx-auto">
+            At MSBarbershop, we aim to elevate men's grooming through precision,
+            style, and attention to detail. Every visit should feel like a premium experience.
         </p>
     </div>
+
 </div>

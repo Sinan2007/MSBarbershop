@@ -20,7 +20,7 @@
 
                     <!-- Placeholder image -->
                     <img src="@barber.ImageUrl"
-                         class="card-img-top"
+                         class="card-img-top" style="max-height:350px; object-fit:cover;"
                          alt="Barber Image">
 
                     <div class="card-body text-center">
@@ -29,6 +29,13 @@
                         <p class="card-text text-muted">
                             @barber.Description
                         </p>
+
+                        <a asp-controller="Barbers"
+                           asp-action="Details"
+                           class="btn btn-dark"
+                           asp-route-id="@barber.Id">
+                            @barber.FullName's info
+                        </a>
 
                         <a asp-controller="Reservations"
                            asp-action="Create"

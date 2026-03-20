@@ -20,11 +20,18 @@ namespace MSBarbershop.WebApp.Controllers
             _logger = logger;
             _context = context;
         }
-
         public async Task<IActionResult> Index()
         {
-            return View();
+            var services = await _context.Services.ToListAsync();
+            var barbers = await _context.Barbers
+                .Where(b => b.IsActive)
+                .ToListAsync();
+
+            ViewBag.Barbers = barbers;
+
+            return View(services);
         }
+
 
         public IActionResult Privacy()
         {
