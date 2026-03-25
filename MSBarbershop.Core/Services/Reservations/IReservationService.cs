@@ -1,4 +1,5 @@
-﻿using MSBarbershop.Data.Entities;
+﻿using MSBarbershop.Core.ViewModels.Reservation;
+using MSBarbershop.Data.Entities;
 using MSBarbershop.WebApp.ViewModels.Reservation;
 
 namespace MSBarbershop.WebApp.Services.Reservations
@@ -24,6 +25,12 @@ namespace MSBarbershop.WebApp.Services.Reservations
 
         Task<List<MyReservationViewModel>> GetBarberUpcomingReservations(int barberId);
         Task<List<MyReservationViewModel>> GetBarberPastReservations(int barberId);
+
+        Task<EditReservationViewModel?> GetReservationForEditAsync(int reservationId, string userId);
+        Task<bool> UpdateReservationAsync(EditReservationViewModel model, string userId);
+
+
+        Task LoadEditReservationDropdownsAsync(EditReservationViewModel model);
 
     }
 

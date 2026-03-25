@@ -6,7 +6,9 @@ using MSBarbershop.WebApp.ViewModels.Reservation;
 
 namespace MSBarbershop.WebApp.Services.Reservations
 {
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
+    using MSBarbershop.Core.ViewModels.Reservation;
     using MSBarbershop.Data;
     using MSBarbershop.Data.Entities;
     using MSBarbershop.Data.Entities.Enums;
@@ -296,6 +298,92 @@ namespace MSBarbershop.WebApp.Services.Reservations
                 .OrderByDescending(r => r.Date)
                 .ThenByDescending(r => r.Time)
                 .ToList();
+        }
+
+        public async Task<EditReservationViewModel?> GetReservationForEditAsync(int reservationId, string userId)
+        {
+            var reservation = await _context.Reservations
+                .FirstOrDefaultAsync(r => r.Id == reservationId && r.UserId == userId);
+            if (reservation == null)
+                return null;
+            var model = new EditReservationViewModel
+            {
+                Id = reservation.Id,
+                BarberId = reservation.BarberId,
+                ServiceId = reservation.ServiceId,
+                Date = reservation.Date,
+                Time = reservation.Time,
+                Barbers = await _context.Barbers
+                    .Select(b => new SelectListItem
+                    {
+                        Value = b.Id.ToString(),
+                        Text = b.FullName
+                    })
+                    .ToListAsync(),
+                Services = await _context.Services
+                    .Select(s => new SelectListItem
+                    {
+                        Value = s.Id.ToString(),
+                        Text = s.Name
+                    })
+                    .ToListAsync()
+            };
+            return model;
+        }
+
+        public async Task<bool> UpdateReservationAsync(EditReservationViewModel model, string userId)
+        {
+            var reservation = await _context.Reservations
+                .FirstOrDefaultAsync(r => r.Id == model.Id && r.UserId == userId);
+            if (reservation == null)
+                return false;
+            if (reservation.Status != ReservationStatus.Active)
+                return false;
+            var service = await _context.Services.FindAsync(model.ServiceId);
+            if (service == null)
+                return false;
+            var existingReservations = await _context.Reservations
+                .Include(r => r.Service)
+                .Where(r =>
+                    r.Id != model.Id &&
+                    r.BarberId == model.BarberId &&
+                    r.Date == model.Date &&
+                    r.Status == ReservationStatus.Active)
+                .ToListAsync();
+            var newStart = model.Time.ToTimeSpan();
+            var newEnd = newStart + TimeSpan.FromMinutes(service.DurationMinutes);
+            bool conflict = existingReservations.Any(r =>
+            {
+                var existingStart = r.Time.ToTimeSpan();
+                var existingEnd = existingStart + TimeSpan.FromMinutes(r.Service.DurationMinutes);
+                return newStart < existingEnd && newEnd > existingStart;
+            });
+            if (conflict)
+                return false;
+            reservation.BarberId = model.BarberId;
+            reservation.ServiceId = model.ServiceId;
+            reservation.Date = model.Date;
+            reservation.Time = model.Time;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task LoadEditReservationDropdownsAsync(EditReservationViewModel model)
+        {
+            model.Barbers = await _context.Barbers
+                .Select(b => new SelectListItem
+                {
+                    Value = b.Id.ToString(),
+                    Text = b.FullName
+                })
+                .ToListAsync();
+            model.Services = await _context.Services
+                .Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Name
+                })
+                .ToListAsync();
         }
 
 

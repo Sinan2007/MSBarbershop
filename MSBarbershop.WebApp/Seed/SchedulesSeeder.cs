@@ -11,7 +11,7 @@ namespace MSBarbershop.WebApp.Seed
             {
                 var schedules = new List<WorkSchedule>();
 
-                for (int barberId = 1; barberId <= 2; barberId++)
+                for (int barberId = 5; barberId <= 7; barberId++)
                 {
                     for (int day = 1; day <= 6; day++)
                     {

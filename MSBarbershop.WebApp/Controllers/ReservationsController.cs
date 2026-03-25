@@ -250,6 +250,35 @@ namespace MSBarbershop.WebApp.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = await _reservationService.GetReservationForEditAsync(id, userId);
+            if (model == null)
+                return NotFound();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditReservationViewModel model)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!ModelState.IsValid)
+            {
+                await _reservationService.LoadEditReservationDropdownsAsync(model);
+                return View(model);
+            }
+            var success = await _reservationService.UpdateReservationAsync(model, userId);
+            if (!success)
+            {
+                ModelState.AddModelError("", "Unable to update reservation. The selected time may already be taken.");
+                await _reservationService.LoadEditReservationDropdownsAsync(model);
+                return View(model);
+            }
+            return RedirectToAction(nameof(MyReservations));
+        }
+
 
 
 
