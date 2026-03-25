@@ -28,3 +28,16 @@ body {
     border-radius: 50%;
     border: 2px solid #ddd;
 }
+
+.card-body .btn.btn-outline-dark.always-dark {
+    align-self: flex-end;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body span.badge {
+    align-self: flex-start;
+}
