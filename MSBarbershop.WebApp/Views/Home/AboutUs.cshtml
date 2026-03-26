@@ -3,87 +3,159 @@
 }
 
 <style>
-    .about-hero {
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/MSBarbershopHomeImage.jpg');
-        background-size: cover;
-        background-position: center;
-        padding: 100px 0;
-        color: white;
+    .about-wrapper {
+        padding: 40px 0 60px 0;
+    }
+
+    .about-title {
         text-align: center;
-    }
-
-    .gold-text {
         color: #d4af37;
+        font-weight: 700;
+        margin-bottom: 10px;
     }
 
-    .about-card {
-        background: #1e1e1e;
-        color: #eee;
-        border: 1px solid #333;
-        padding: 30px;
-        border-radius: 10px;
+    .about-subtitle {
+        text-align: center;
+        color: #6c757d;
+        margin-bottom: 40px;
     }
 
-        .about-card:hover {
-            border-color: #d4af37;
-            transition: 0.3s;
+    .about-box {
+        background-color: #181818;
+        color: white;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .about-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        min-height: 420px;
+    }
+
+    .about-content {
+        padding: 40px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        .about-content h2,
+        .mission-box h2 {
+            color: #d4af37;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #e6e6e6;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+    .about-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0 30px 0;
+    }
+
+        .about-list li {
+            margin-bottom: 12px;
+            color: #f1f1f1;
+        }
+
+            .about-list li span {
+                color: #d4af37;
+                margin-right: 10px;
+                font-weight: bold;
+            }
+
+    .mission-box {
+        margin-top: 40px;
+        background: white;
+        border-radius: 14px;
+        padding: 35px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+        .mission-box p {
+            color: #5f6b7a;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+    .btn-gold {
+        background-color: #d4af37;
+        color: black;
+        font-weight: 600;
+        border: none;
+        padding: 12px 28px;
+        transition: 0.3s;
+    }
+
+        .btn-gold:hover {
+            background-color: #e6c14a;
+            color: black;
         }
 </style>
 
+<div class="container about-wrapper">
 
+    <h1 class="about-title">ABOUT US</h1>
+    <p class="about-subtitle">Tradition, precision and modern style in one place.</p>
 
-<div class="container">
+    <div class="about-box">
+        <div class="row g-0">
+            <div class="col-lg-6">
+                <img src="~/images/MSBarbershopHomeImage.jpg" alt="MS Barbershop" class="about-image" />
+            </div>
 
-    <!-- 🔥 MAIN SECTION -->
-    <div class="row align-items-center mb-5">
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <h2>Our Story</h2>
 
-        <div class="col-md-6">
-            <img src="~/images/MS logo.png"
-                 class="img-fluid rounded shadow-lg"
-                 style="object-fit:cover; max-height:400px; width:100%;" />
-        </div>
+                    <p>
+                        MSBarbershop was created to offer more than just a haircut.
+                        We wanted to build a place where every client feels comfortable,
+                        respected and leaves looking sharper than when they walked in.
+                    </p>
 
-        <div class="col-md-6">
-            <div class="about-card">
+                    <p>
+                        Our team combines classic barbering with modern trends, so whether
+                        you want a clean haircut, beard shaping or a full style refresh,
+                        you are in the right place.
+                    </p>
 
-                <h3 class="fw-bold gold-text mb-3">Our Story</h3>
+                    <ul class="about-list">
+                        <li><span>✔</span>Experienced barbers</li>
+                        <li><span>✔</span>Premium quality service</li>
+                        <li><span>✔</span>Clean and stylish atmosphere</li>
+                        <li><span>✔</span>Easy online booking</li>
+                    </ul>
 
-                <p>
-                    MSBarbershop was created with one simple mission – to provide premium grooming
-                    services in a modern and comfortable atmosphere.
-                </p>
-
-                <p>
-                    Our barbers combine classic techniques with modern trends,
-                    ensuring every client leaves confident and fresh.
-                </p>
-
-                <h5 class="fw-bold mt-4">Why Choose Us?</h5>
-
-                <ul class="list-unstyled">
-                    <li>✔ Experienced barbers</li>
-                    <li>✔ Premium products</li>
-                    <li>✔ Relaxing atmosphere</li>
-                    <li>✔ Easy online booking</li>
-                </ul>
-
-                <a asp-controller="Reservations" asp-action="Create"
-                   class="btn btn-outline-light mt-3">
-                    Book Appointment
-                </a>
-
+                    <div>
+                        <a asp-controller="Reservations"
+                           asp-action="Create"
+                           class="btn btn-gold">
+                            Book Appointment
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 
-    <!-- 🔥 MISSION SECTION -->
-    <div class="text-center mt-5">
-        <h2 class="fw-bold gold-text mb-3">Our Mission</h2>
-
-        <p class="text-muted w-75 mx-auto">
-            At MSBarbershop, we aim to elevate men's grooming through precision,
-            style, and attention to detail. Every visit should feel like a premium experience.
+    <div class="mission-box">
+        <h2>Our Mission</h2>
+        <p>
+            Our mission is to help every client feel confident through quality grooming,
+            attention to detail and a premium barbershop experience. At MSBarbershop,
+            style is not just a service — it is part of your identity.
         </p>
     </div>
 

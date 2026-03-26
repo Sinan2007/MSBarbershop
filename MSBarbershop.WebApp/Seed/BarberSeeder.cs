@@ -25,7 +25,16 @@ namespace MSBarbershop.WebApp.Seed
             FullName = "Nikola Ivanov",
             PhoneNumber = "0888765432",
             Description = "18 years old, first year as barber, learning, friendly, single",
-            ImageUrl = "/images/barbers/nikola_ivanov.jpg",
+            ImageUrl = "/images/barbers/khabib.jpg",
+            IsActive = true
+        },
+
+                new Barber
+        {
+            FullName = "Nikola Ivanov",
+            PhoneNumber = "0888765432",
+            Description = "20 years old, second year as barber, learning, friendly, single",
+            ImageUrl = "/images/barbers/khamzat.jpg",
             IsActive = true
         }
         };

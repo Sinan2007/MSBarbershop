@@ -41,3 +41,19 @@ body {
 .card-body span.badge {
     align-self: flex-start;
 }
+
+
+.booking-btn {
+    border: 2px solid #d4af37;
+    border-radius: 30px;
+    padding: 8px 18px !important;
+    margin-left: 10px;
+    color: #d4af37 !important;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+    .booking-btn:hover {
+        background-color: #d4af37;
+        color: black !important;
+    }
