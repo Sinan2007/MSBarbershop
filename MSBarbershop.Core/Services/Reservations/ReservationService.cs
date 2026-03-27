@@ -105,6 +105,13 @@ namespace MSBarbershop.WebApp.Services.Reservations
 
         public async Task CreateReservation(string userId, CreateReservationViewModel model)
         {
+
+            var today = DateOnly.FromDateTime(DateTime.Today);
+
+            if (model.Date < today)
+            {
+                throw new Exception("You cannot book an appointment for a past date.");
+            }
             var service = await _context.Services.FindAsync(model.ServiceId);
 
             var existing = await _context.Reservations
@@ -131,6 +138,7 @@ namespace MSBarbershop.WebApp.Services.Reservations
                 throw new Exception("This time slot is already taken.");
             }
 
+            
             var reservation = new Reservation
             {
                 UserId = userId,
@@ -342,6 +350,13 @@ namespace MSBarbershop.WebApp.Services.Reservations
             var service = await _context.Services.FindAsync(model.ServiceId);
             if (service == null)
                 return false;
+
+            var today = DateOnly.FromDateTime(DateTime.Today);
+
+            if (model.Date < today)
+            {
+                throw new Exception("You cannot book an appointment for a past date.");
+            }
             var existingReservations = await _context.Reservations
                 .Include(r => r.Service)
                 .Where(r =>

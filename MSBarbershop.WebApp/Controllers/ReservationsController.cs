@@ -169,8 +169,6 @@ namespace MSBarbershop.WebApp.Controllers
         }
 
 
-
-        [Authorize(Roles = "Admin , Barber")]
         [HttpPost]
         public async Task<IActionResult> Cancel(int id)
         {

@@ -4,73 +4,206 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<style>
+    .register-page {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 15px;
+    }
 
-<div class="row">
-    <div class="col-md-4">
+    .register-card {
+        width: 100%;
+        max-width: 520px;
+        background: #111827;
+        border: 1px solid #2a2f3a;
+        border-radius: 18px;
+        padding: 35px 30px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+    }
+
+    .register-title {
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .register-subtitle {
+        text-align: center;
+        color: #9ca3af;
+        margin-bottom: 28px;
+    }
+
+    .form-label {
+        color: #f3f4f6;
+        font-weight: 500;
+    }
+
+    .form-control {
+        background-color: #0b1220;
+        border: 1px solid #374151;
+        color: white;
+        border-radius: 10px;
+        padding: 12px 14px;
+    }
+
+        .form-control:focus {
+            background-color: #0b1220;
+            color: white;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15);
+        }
+
+    .btn-register {
+        width: 100%;
+        background-color: #d4af37;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+        .btn-register:hover {
+            background-color: #e6c14a;
+            color: black;
+        }
+
+    .register-links {
+        text-align: center;
+        margin-top: 22px;
+    }
+
+        .register-links a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+            .register-links a:hover {
+                text-decoration: underline;
+            }
+
+    .external-box {
+        margin-top: 28px;
+        padding-top: 20px;
+        border-top: 1px solid #2f3642;
+    }
+
+    .external-title {
+        text-align: center;
+        color: #9ca3af;
+        margin-bottom: 15px;
+    }
+
+    .btn-external {
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="container register-page">
+    <div class="register-card">
+        <div class="text-center mb-3">
+            <img src="~/images/MS logo.png"
+                 alt="MS Barbershop"
+                 style="height: 70px;" />
+        </div>
+
+        <h2 class="register-title">Create account</h2>
+        <p class="register-subtitle">Join MS Barbershop and book your next appointment</p>
+
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="First Name" />
-                <label asp-for="Input.FirstName">First Name</label>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.FirstName" class="form-label">First Name</label>
+                <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="Enter your first name" />
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
 
-            <div class="form-floating mb-3">
-                <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="Last Name" />
-                <label asp-for="Input.LastName">Last Name</label>
+            <div class="mb-3">
+                <label asp-for="Input.LastName" class="form-label">Last Name</label>
+                <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="Enter your last name" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
+            <div class="mb-3">
+                <label asp-for="Input.Email" class="form-label">Email</label>
+                <input asp-for="Input.Email"
+                       class="form-control"
+                       autocomplete="username"
+                       aria-required="true"
+                       placeholder="Enter your email" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
+
+            <div class="mb-3">
+                <label asp-for="Input.Password" class="form-label">Password</label>
+                <input asp-for="Input.Password"
+                       class="form-control"
+                       autocomplete="new-password"
+                       aria-required="true"
+                       placeholder="Create a password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+
+            <div class="mb-4">
+                <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password</label>
+                <input asp-for="Input.ConfirmPassword"
+                       class="form-control"
+                       autocomplete="new-password"
+                       aria-required="true"
+                       placeholder="Confirm your password" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+
+            <button id="registerSubmit" type="submit" class="btn btn-register">
+                Register
+            </button>
+
+            <div class="register-links">
+                <p class="mb-0 mt-3">
+                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">
+                        Already have an account? Log in
+                    </a>
+                </p>
+            </div>
         </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
+
+        @{
+            if ((Model.ExternalLogins?.Count ?? 0) > 0)
+            {
+                <div class="external-box">
+                    <p class="external-title">Or continue with</p>
+
+                    <form id="external-account"
+                          asp-page="./ExternalLogin"
+                          asp-route-returnUrl="@Model.ReturnUrl"
+                          method="post">
+                        @foreach (var provider in Model.ExternalLogins!)
+                        {
+                            <button type="submit"
+                                    class="btn btn-outline-light btn-external"
+                                    name="provider"
+                                    value="@provider.Name"
+                                    title="Register using your @provider.DisplayName account">
+                                @provider.DisplayName
+                            </button>
+                        }
                     </form>
-                }
+                </div>
             }
-        </section>
+        }
+
     </div>
 </div>
 
