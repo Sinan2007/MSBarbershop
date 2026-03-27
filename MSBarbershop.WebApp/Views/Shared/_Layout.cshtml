@@ -51,6 +51,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="WorkSchedules" asp-action="Index">Schedules</a>
                             </li>
+                            <li class="nav-item">
+    <a class="nav-link text-white" asp-controller="Reviews" asp-action="AllReviews">Reviews</a>
+</li>
                         }
                         else if (User.IsInRole("Barber"))
                         {

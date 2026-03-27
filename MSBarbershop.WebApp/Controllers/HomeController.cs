@@ -1,12 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MSBarbershop.Core.ViewModels.Home;
+using MSBarbershop.Data;
+using MSBarbershop.Data.Entities;
 using MSBarbershop.WebApp.Models;
 using System.Diagnostics;
-using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
-using MSBarbershop.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using MSBarbershop.Data;
 
 namespace MSBarbershop.WebApp.Controllers
 {
@@ -14,24 +15,33 @@ namespace MSBarbershop.WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
          public readonly ApplicationDbContext _context;
+        private readonly IReviewService _reviewService;
 
-        public HomeController(ILogger<HomeController> logger,ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger,ApplicationDbContext context, IReviewService reviewService)
         {
             _logger = logger;
             _context = context;
+            _reviewService = reviewService;
         }
         public async Task<IActionResult> Index()
         {
             var services = await _context.Services.ToListAsync();
+
             var barbers = await _context.Barbers
                 .Where(b => b.IsActive)
                 .ToListAsync();
 
-            ViewBag.Barbers = barbers;
+            var reviews = await _reviewService.GetApprovedReviews();
 
-            return View(services);
+            var model = new HomeIndexViewModel
+            {
+                Services = services,
+                Barbers = barbers,
+                Reviews = reviews
+            };
+
+            return View(model);
         }
-
 
         public IActionResult Privacy()
         {

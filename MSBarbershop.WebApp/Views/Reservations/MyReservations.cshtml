@@ -75,6 +75,16 @@
                                     @r.Status
                                 </span>
 
+                                @if (r.Status == MSBarbershop.Data.Entities.Enums.ReservationStatus.Completed)
+                                {
+                                    <a asp-controller="Reviews"
+                                       asp-action="Create"
+                                       asp-route-reservationId="@r.Id"
+                                       class="btn btn-sm btn-outline-dark mt-2">
+                                        Leave Review
+                                    </a>
+                                }
+
                             </div>
                         </div>
                     </div>

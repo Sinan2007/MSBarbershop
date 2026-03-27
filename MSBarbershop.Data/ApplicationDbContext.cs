@@ -16,6 +16,7 @@
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<WorkSchedule> WorkSchedules { get; set; }
         public DbSet<BarberService> BarberServices { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,6 +30,13 @@
            .WithMany()
            .HasForeignKey(b => b.UserId)
            .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Review>()
+    .HasOne(r => r.Reservation)
+    .WithMany()
+    .HasForeignKey(r => r.ReservationId)
+    .OnDelete(DeleteBehavior.NoAction)
+    .OnDelete(DeleteBehavior.Restrict);
 
 
 
