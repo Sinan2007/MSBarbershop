@@ -150,24 +150,45 @@
 </div>
 
 
-<h2 class="section-title mt-5">WHAT OUR CLIENTS SAY</h2>
+<section class="reviews-section py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">WHAT OUR CLIENTS SAY</h2>
 
-<div class="container mt-5">
-    <h3 class="text-center mb-4">Customer Reviews</h3>
-
-    <div class="row">
-        @foreach (var review in Model.Reviews)
+        @if (Model.Reviews != null && Model.Reviews.Any())
         {
-            <div class="col-md-4">
-                <div class="card p-3 mb-3">
-                    <h5>@review.User.FirstName</h5>
-                    <p>@review.Content</p>
-                    <small>⭐ @review.Rating / 5</small>
-                </div>
+            <div class="row justify-content-center g-4">
+                @foreach (var review in Model.Reviews)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="review-card h-100">
+                            <div class="review-quote">“</div>
+
+                            <p class="review-text">
+                                @review.Content
+                            </p>
+
+                            <div class="review-rating mb-3">
+                                @for (int i = 0; i < review.Rating; i++)
+                                {
+                                    <span>★</span>
+                                }
+                            </div>
+
+                            <div class="review-user">
+                                <span class="review-user-line"></span>
+                                <h5>@review.User.FirstName @review.User.LastName</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         }
+        else
+        {
+            <p class="text-center text-muted">No reviews yet.</p>
+        }
     </div>
-</div>
+</section>
 
 
 
