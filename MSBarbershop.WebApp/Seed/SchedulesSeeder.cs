@@ -10,8 +10,8 @@ namespace MSBarbershop.WebApp.Seed
             if (!context.WorkSchedules.Any())
             {
                 var schedules = new List<WorkSchedule>();
-
-                for (int barberId = 8; barberId <= 10; barberId++)
+                var barbers = context.Barbers.ToList();
+                foreach (var barber in barbers)
                 {
                     for (int day = 1; day <= 6; day++)
                     {
@@ -19,7 +19,7 @@ namespace MSBarbershop.WebApp.Seed
                         {
                             schedules.Add(new WorkSchedule
                             {
-                                BarberId = barberId,
+                                BarberId = barber.Id,
                                 DayOfWeek = (DayOfWeek)day,
                                 StartTime = new TimeSpan(10, 0, 0),
                                 EndTime = new TimeSpan(16, 0, 0)
@@ -29,7 +29,7 @@ namespace MSBarbershop.WebApp.Seed
                         {
                             schedules.Add(new WorkSchedule
                             {
-                                BarberId = barberId,
+                                BarberId = barber.Id,
                                 DayOfWeek = (DayOfWeek)day,
                                 StartTime = new TimeSpan(9, 0, 0),
                                 EndTime = new TimeSpan(18, 0, 0)
