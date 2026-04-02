@@ -49,7 +49,6 @@ namespace MSBarbershop.WebApp.Controllers
                     }).ToListAsync()
             };
 
-            // Ако Admin може да избира клиент
             if (User.IsInRole("Admin"))
             {
                 model.Users = await _userManager.Users
@@ -169,19 +168,39 @@ namespace MSBarbershop.WebApp.Controllers
         }
 
 
+        [Authorize(Roles = "Admin,Barber,Customer")]
         [HttpPost]
         public async Task<IActionResult> Cancel(int id)
         {
-            await _reservationService.CancelReservation(id);
-            if (User.IsInRole("Admin"))
-            {
-                return RedirectToAction(nameof(AllReservations));
-            }
-            else
-            {
-                return RedirectToAction(nameof(BarberDashboard));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            var reservation = await _context.Reservations
+                .Include(r => r.Barber)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (reservation == null)
+                return NotFound();
+
+            if (User.IsInRole("Customer") && reservation.UserId != userId)
+                return Forbid();
+
+            if (User.IsInRole("Barber"))
+            {
+                var barber = await _context.Barbers.FirstOrDefaultAsync(b => b.UserId == userId);
+
+                if (barber == null || reservation.BarberId != barber.Id)
+                    return Forbid();
             }
+
+            await _reservationService.CancelReservation(id);
+
+            if (User.IsInRole("Admin"))
+                return RedirectToAction(nameof(AllReservations));
+
+            if (User.IsInRole("Barber"))
+                return RedirectToAction(nameof(BarberReservations));
+
+            return RedirectToAction(nameof(MyReservations));
         }
 
         [Authorize(Roles = "Admin , Barber")]
