@@ -39,6 +39,8 @@ public class ReviewsController : Controller
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         await _reviewService.CreateReview(userId, model);
+        TempData["Review"] = "You have succesfully added a review!";
+
 
         return RedirectToAction("MyReservations", "Reservations");
     }

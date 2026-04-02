@@ -79,10 +79,20 @@ namespace MSBarbershop.WebApp.Services.Reservations
 
             var current = schedule.StartTime;
 
+            var now = DateTime.Now;
+            var today = DateOnly.FromDateTime(now);
+            var currentTime = TimeOnly.FromDateTime(now).ToTimeSpan();
+
             while (current + duration <= schedule.EndTime)
             {
                 var slotStart = current;
                 var slotEnd = current + duration;
+
+                if (date == today && slotStart <= currentTime)
+                {
+                    current = current.Add(TimeSpan.FromMinutes(15));
+                    continue;
+                }
 
                 bool taken = reservations.Any(r =>
                 {
@@ -133,10 +143,13 @@ namespace MSBarbershop.WebApp.Services.Reservations
                 return newStart < rEnd && newEnd > rStart;
             });
 
+
+
             if (conflict)
             {
                 throw new Exception("This time slot is already taken.");
             }
+
 
             
             var reservation = new Reservation

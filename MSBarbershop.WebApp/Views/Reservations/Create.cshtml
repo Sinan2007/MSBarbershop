@@ -15,6 +15,7 @@
                     </h3>
 
                     <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
 
                         <div class="mb-3">
                             <label asp-for="BarberId" class="form-label">Barber</label>
