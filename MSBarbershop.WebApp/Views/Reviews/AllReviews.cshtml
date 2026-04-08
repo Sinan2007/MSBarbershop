@@ -3,6 +3,13 @@
 <div class="container mt-5">
     <h2 class="fw-bold mb-4">All Reviews</h2>
 
+    @if (TempData["Review"] != null)
+    {
+        <div class="alert alert-success text-center">
+            @TempData["Review"]
+        </div>
+    }   
+
     <div class="card shadow-lg border-0">
         <div class="card-body">
             <table class="table table-hover align-middle">
@@ -39,14 +46,11 @@
                                 {
                                     <form asp-action="Approve" method="post" class="d-inline">
                                         <input type="hidden" name="id" value="@review.Id" />
-                                        <button class="btn btn-sm btn-success">Approve</button>
+                                        <button class="btn btn-sm btn-success">Show</button>
                                     </form>
                                 }
 
-                                <form asp-action="Delete" method="post" class="d-inline">
-                                    <input type="hidden" name="id" value="@review.Id" />
-                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                </form>
+                               
                             </td>
                         </tr>
                     }

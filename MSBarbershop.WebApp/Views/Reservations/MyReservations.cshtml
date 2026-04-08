@@ -4,12 +4,22 @@
 <div class="container mt-5">
 
     <h2 class="mb-4 fw-bold">My Reservations</h2>
-    @if (TempData["Review"] != null)
+    @if (TempData["ReviewError"] != null)
     {
-         <div class="alert alert-success">
-             @TempData["Review"]
+         <div class="alert alert-danger text-center">
+             @TempData["ReviewError"]
         </div>
     }
+
+    @if (TempData["Review"] != null)
+    {
+        <div class="alert alert-success text-center">
+            @TempData["Review"]
+        </div>
+    }
+
+
+
     <!-- Tabs -->
     <ul class="nav nav-tabs mb-4" id="reservationTabs">
         <li class="nav-item">

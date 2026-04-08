@@ -20,7 +20,11 @@ public class ReviewsController : Controller
         var canReview = await _reviewService.CanUserReviewReservation(reservationId, userId);
 
         if (!canReview)
-            return NotFound();
+        {
+            TempData["ReviewError"] = "You have already reviewed this reservation or you are not allowed to.";
+
+            return RedirectToAction("MyReservations", "Reservations");
+        }
 
         var model = new CreateReviewViewModel
         {
