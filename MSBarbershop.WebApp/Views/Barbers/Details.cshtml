@@ -37,6 +37,51 @@
 
             </div>
 
+            <hr class="my-5" />
+
+            <div class="gallery-section">
+                <h3 class="gallery-title text-center mb-4">Barber's Work</h3>
+
+                <div class="row g-4">
+                    @if (Model.FullName == "Ivan Ivanov")
+                    {
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/ivan/1.jpg" class="gallery-img" />
+                        </div>
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/ivan/2.jpg" class="gallery-img" />
+                        </div>
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/ivan/3.jpg" class="gallery-img" />
+                        </div>
+                    }
+                    else if (Model.FullName == "Nikola Ivanov")
+                    {
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/nikola/n1.jpg" class="gallery-img" />
+                        </div>
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/nikola/n2.jpg" class="gallery-img" />
+                        </div>
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/nikola/n3.jpg" class="gallery-img" />
+                        </div>
+                    }
+                    else if (Model.FullName == "Svetoslav Vutsov")
+                    {
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/svetoslav/s1.jpg" class="gallery-img" />
+                        </div>
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/svetoslav/s2.jpg" class="gallery-img" />
+                        </div>
+                        <div class="col-md-4">
+                            <img src="~/images/gallery/svetoslav/s3.jpg" class="gallery-img" />
+                        </div>
+                    }
+                </div>
+            </div>
+
         </div>
 
     </div>

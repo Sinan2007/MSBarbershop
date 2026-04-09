@@ -24,4 +24,10 @@
     <ProjectReference Include="..\MSBarbershop.Core\MSBarbershop.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\gallery\ivan\" />
+    <Folder Include="wwwroot\images\gallery\svetoslav\" />
+    <Folder Include="wwwroot\images\gallery\nikola\" />
+  </ItemGroup>
+
 </Project>

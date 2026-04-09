@@ -36,6 +36,7 @@ namespace MSBarbershop.WebApp.Seed
                 "#Sinan2007bg",
                 "Sinan",
                 "Admin",
+                "0888888888",
                 "Admin");
 
             await CreateUserIfNotExists(
@@ -44,6 +45,7 @@ namespace MSBarbershop.WebApp.Seed
                 "#Stanislav25",
                 "Stanislav",
                 "Dimov",
+                "0877777777",
                 "Customer");
 
             await CreateUserIfNotExists(
@@ -52,6 +54,7 @@ namespace MSBarbershop.WebApp.Seed
                 "#Joro61",
                 "Georgi",
                 "Yordanov",
+                "0899999999",
                 "Customer");
 
             await CreateUserIfNotExists(
@@ -60,6 +63,7 @@ namespace MSBarbershop.WebApp.Seed
                 "#Ivan67",
                 "Ivan",
                 "Ivanov",
+                "0866666666",
                 "Barber");
 
             await CreateUserIfNotExists(
@@ -68,6 +72,7 @@ namespace MSBarbershop.WebApp.Seed
                 "#Niko21",
                 "Nikola",
                 "Ivanov",
+                "0875555555",
                 "Barber");
 
             await CreateUserIfNotExists(
@@ -76,6 +81,7 @@ namespace MSBarbershop.WebApp.Seed
                 "#Vutsov92",
                 "Svetoslav",
                 "Vutsov",
+                "0894444444",
                 "Barber");
         }
 
@@ -85,6 +91,7 @@ namespace MSBarbershop.WebApp.Seed
             string password,
             string firstName,
             string lastName,
+            string phoneNumber,
             string role)
         {
             var existingUser = await userManager.FindByEmailAsync(email);
@@ -105,6 +112,7 @@ namespace MSBarbershop.WebApp.Seed
                 Email = email,
                 FirstName = firstName,
                 LastName = lastName,
+                PhoneNumber = phoneNumber,
                 EmailConfirmed = true
             };
 

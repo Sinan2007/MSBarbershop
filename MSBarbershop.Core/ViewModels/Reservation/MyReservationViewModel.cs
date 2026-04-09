@@ -8,6 +8,7 @@ public class MyReservationViewModel
     public string ServiceName { get; set; }
 
     public string CustomerName { get; set; }
+    public string? ClientPhoneNumber { get; set; }
 
     public DateOnly Date { get; set; }
     public TimeOnly Time { get; set; }

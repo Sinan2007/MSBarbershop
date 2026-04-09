@@ -23,7 +23,7 @@ namespace MSBarbershop.WebApp.Seed
                 barbers.Add(new Barber
                 {
                     FullName = "Ivan Ivanov",
-                    PhoneNumber = "111111111",
+                    PhoneNumber= "0866666666",
                     Description = "Professional barber",
                     ImageUrl = "/images/barbers/ivan_ivanov.jpg",
                     IsActive = true,
@@ -36,7 +36,7 @@ namespace MSBarbershop.WebApp.Seed
                 barbers.Add(new Barber
                 {
                     FullName = "Nikola Ivanov",
-                    PhoneNumber = "222222222",
+                    PhoneNumber = "0875555555",
                     Description = "Fade specialist",
                     ImageUrl = "/images/barbers/khabib.jpg",
                     IsActive = true,
@@ -49,7 +49,7 @@ namespace MSBarbershop.WebApp.Seed
                 barbers.Add(new Barber
                 {
                     FullName = "Svetoslav Vutsov",
-                    PhoneNumber = "333333333",
+                    PhoneNumber = "0894444444",
                     Description = "Beard expert",
                     ImageUrl = "/images/barbers/khamzat.jpg",
                     IsActive = true,

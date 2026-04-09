@@ -16,6 +16,8 @@ namespace MSBarbershop.WebApp.ViewModels.Reservation
         public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
         public TimeOnly Time { get; set; }
+
+        public string PhoneNumber { get; set; }
         public IEnumerable<SelectListItem> Barbers { get; set; } = new List<SelectListItem>();
         public IEnumerable<SelectListItem> Services { get; set; } = new List<SelectListItem>();
 

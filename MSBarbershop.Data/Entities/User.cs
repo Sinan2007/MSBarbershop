@@ -13,6 +13,7 @@ namespace MSBarbershop.Data.Entities
     {
         public string FirstName { get; set; } 
         public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }

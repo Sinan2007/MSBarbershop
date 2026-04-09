@@ -282,6 +282,7 @@ namespace MSBarbershop.WebApp.Services.Reservations
                 {
                     Id = r.Id,
                     BarberName = r.User.FirstName + " " + r.User.LastName,
+                    ClientPhoneNumber=r.User.PhoneNumber,
                     ServiceName = r.Service.Name,
                     Date = r.Date,
                     Time = r.Time,
