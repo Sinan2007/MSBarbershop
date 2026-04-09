@@ -21,8 +21,7 @@ public class ReviewsController : Controller
 
         if (!canReview)
         {
-            TempData["ReviewError"] = "You have already reviewed this reservation or you are not allowed to.";
-
+            TempData["ErrorMessage"] = "You have already reviewed this reservation or you are not allowed to.";
             return RedirectToAction("MyReservations", "Reservations");
         }
 
@@ -43,8 +42,8 @@ public class ReviewsController : Controller
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         await _reviewService.CreateReview(userId, model);
-        TempData["Review"] = "You have succesfully added a review!";
 
+        TempData["SuccessMessage"] = "You have successfully added a review.";
 
         return RedirectToAction("MyReservations", "Reservations");
     }

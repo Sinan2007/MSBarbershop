@@ -32,6 +32,8 @@ namespace MSBarbershop.WebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int? id = null)
         {
+
+
             var model = new CreateReservationViewModel
             {
                 Barbers = await _context.Barbers
@@ -79,6 +81,8 @@ namespace MSBarbershop.WebApp.Controllers
             }
 
             string userId;
+
+            TempData["SuccessMessage"] = "Your reservation was created successfully.";
 
             if (User.IsInRole("Admin") && !string.IsNullOrEmpty(model.UserId))
             {
@@ -192,6 +196,8 @@ namespace MSBarbershop.WebApp.Controllers
                     return Forbid();
             }
 
+            TempData["SuccessMessage"] = "Reservation cancelled successfully.";
+
             await _reservationService.CancelReservation(id);
 
             if (User.IsInRole("Admin"))
@@ -208,6 +214,9 @@ namespace MSBarbershop.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Complete(int id)
         {
+
+            TempData["SuccessMessage"] = "Reservation completed successfully.";
+
             await _reservationService.CompleteReservation(id);
             if (User.IsInRole("Admin"))
             {
@@ -217,6 +226,8 @@ namespace MSBarbershop.WebApp.Controllers
             {
                 return RedirectToAction(nameof(BarberDashboard));
             }
+
+
         }
 
 
