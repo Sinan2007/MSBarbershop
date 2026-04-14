@@ -97,11 +97,72 @@
                     $@service.Price
                 </h5>
 
+                <h5 class="fw-bold mt-3">
+
+                    @service.DurationMinutes minutes
+                </h5>
+
             </div>
         </div>
     }
 
 </div>
+
+<section class="why-us-section py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">WHY CHOOSE US</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="why-card h-100 text-center">
+                    <div class="why-icon">✂</div>
+                    <h4 class="why-title">Professional Barbers</h4>
+                    <p class="why-text">
+                        Our team combines precision, experience and modern barbering style
+                        to give every client the best result.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="why-card h-100 text-center">
+                    <div class="why-icon">★</div>
+                    <h4 class="why-title">Premium Experience</h4>
+                    <p class="why-text">
+                        We focus on comfort, atmosphere and attention to detail so every visit
+                        feels more than just a haircut.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="why-card h-100 text-center">
+                    <div class="why-icon">🕒</div>
+                    <h4 class="why-title">Easy Online Booking</h4>
+                    <p class="why-text">
+                        Book your appointment quickly, choose your barber and service,
+                        and manage your reservations anytime.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="working-hours-section py-5">
+    <div class="container">
+        <div class="hours-box text-center">
+            <h2 class="section-title mb-4">WORKING HOURS</h2>
+
+            <div class="hours-list">
+                <p><strong>Monday - Friday:</strong> 09:00 - 18:00</p>
+                <p><strong>Saturday:</strong> 10:00 - 16:00</p>
+                <p><strong>Sunday:</strong> Closed</p>
+                <p><strong>Address:</strong> Mazalat 2 Kazanlak</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <h2 class="section-title mt-5">OUR BARBERS</h2>
 
@@ -117,7 +178,7 @@
 
                 <img src="@barber.ImageUrl"
                      class="img-fluid rounded mb-3"
-                     style="height:250px; object-fit:cover;" />
+                     style="height:250px; object-fit:cover; object-position: top;" />
 
                 <h4>@barber.FullName</h4>
 
@@ -193,14 +254,3 @@
 
 
 
-<!-- Working Hours / CTA -->
-<div class="bg-dark text-white py-5 mt-5">
-    <div class="container text-center">
-        <h3>READY FOR A NEW LOOK?</h3>
-        <p>Monday - Friday: 09:00 - 18:00</p>
-        <p>Saturday: 10:00 - 16:00</p>
-        <p>Sunday: CLOSED</p>
-        <p>Address: Mazalat 2 Kazanlak.</p>
-        <a asp-controller="Home" asp-action="AboutUs" class="btn btn-outline-light mt-3">Learn More About Us</a>
-    </div>
-</div>

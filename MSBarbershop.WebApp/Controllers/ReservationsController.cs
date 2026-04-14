@@ -196,7 +196,7 @@ namespace MSBarbershop.WebApp.Controllers
                     return Forbid();
             }
 
-            TempData["SuccessMessage"] = "Reservation cancelled successfully.";
+            TempData["ErrorMessage"] = "Reservation cancelled successfully.";
 
             await _reservationService.CancelReservation(id);
 

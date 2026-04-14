@@ -159,3 +159,61 @@ body {
         border-color: #d4af37;
         box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
+
+.why-us-section {
+    background-color: #f8f8f8;
+}
+
+.why-card {
+    background: linear-gradient(145deg, #181818, #222);
+    color: white;
+    border: 1px solid #2f2f2f;
+    border-radius: 18px;
+    padding: 35px 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+    .why-card:hover {
+        transform: translateY(-6px);
+        border-color: #d4af37;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+    }
+
+.why-icon {
+    font-size: 2.8rem;
+    color: #d4af37;
+    margin-bottom: 18px;
+    line-height: 1;
+}
+
+.why-title {
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: white;
+}
+
+.why-text {
+    color: #c9c9c9;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+.working-hours-section {
+    background-color: #f8f8f8;
+}
+
+.hours-box {
+    background: #fff;
+    border-radius: 18px;
+    padding: 35px 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.hours-list p {
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 12px;
+}

@@ -25,7 +25,7 @@ namespace MSBarbershop.WebApp.Seed
                     FullName = "Ivan Ivanov",
                     PhoneNumber= "0866666666",
                     Description = "Professional barber",
-                    ImageUrl = "/images/barbers/ivan_ivanov.jpg",
+                    ImageUrl = "/images/barbers/ivan.jpg",
                     IsActive = true,
                     UserId = ivanUser.Id
                 });
@@ -38,7 +38,7 @@ namespace MSBarbershop.WebApp.Seed
                     FullName = "Nikola Ivanov",
                     PhoneNumber = "0875555555",
                     Description = "Fade specialist",
-                    ImageUrl = "/images/barbers/khabib.jpg",
+                    ImageUrl = "/images/barbers/nikola.jpg",
                     IsActive = true,
                     UserId = nikolaUser.Id
                 });
@@ -51,7 +51,7 @@ namespace MSBarbershop.WebApp.Seed
                     FullName = "Svetoslav Vutsov",
                     PhoneNumber = "0894444444",
                     Description = "Beard expert",
-                    ImageUrl = "/images/barbers/khamzat.jpg",
+                    ImageUrl = "/images/barbers/svetlio.jpg",
                     IsActive = true,
                     UserId = svetoslavUser.Id
                 });
