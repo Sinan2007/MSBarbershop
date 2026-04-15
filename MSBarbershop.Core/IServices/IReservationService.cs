@@ -2,7 +2,7 @@
 using MSBarbershop.Data.Entities;
 using MSBarbershop.WebApp.ViewModels.Reservation;
 
-namespace MSBarbershop.WebApp.Services.Reservations
+namespace MSBarbershop.Core.IServices
 {
     public interface IReservationService
     {

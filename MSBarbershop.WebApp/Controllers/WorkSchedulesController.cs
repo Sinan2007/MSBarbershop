@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MSBarbershop.Core.IServices;
 using MSBarbershop.Data.Entities;
-using MSBarbershop.WebApp.Services.WorkSchedules;
 using MSBarbershop.WebApp.ViewModels.WorkSchedule;
 
 public class WorkSchedulesController : Controller

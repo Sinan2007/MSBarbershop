@@ -1,4 +1,4 @@
-﻿namespace MSBarbershop.WebApp.Services.WorkSchedules
+﻿namespace MSBarbershop.Core.IServices
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
     using MSBarbershop.Data.Entities;

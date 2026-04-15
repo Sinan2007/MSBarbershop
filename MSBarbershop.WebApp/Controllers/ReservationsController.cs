@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MSBarbershop.Core.IServices;
 using MSBarbershop.Core.ViewModels.Reservation;
 using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
-using MSBarbershop.WebApp.Services.Reservations;
 using MSBarbershop.WebApp.ViewModels.Reservation;
 using System.Security.Claims;
 

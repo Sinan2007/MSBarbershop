@@ -1,0 +1,135 @@
+﻿@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<style>
+    .manage-page {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 15px;
+    }
+
+    .manage-card {
+        width: 100%;
+        max-width: 560px;
+        background: #111827;
+        border: 1px solid #2a2f3a;
+        border-radius: 18px;
+        padding: 35px 30px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+    }
+
+    .manage-title {
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .manage-subtitle {
+        text-align: center;
+        color: #9ca3af;
+        margin-bottom: 28px;
+    }
+
+    .form-label {
+        color: #f3f4f6;
+        font-weight: 500;
+    }
+
+    .form-control {
+        background-color: #0b1220;
+        border: 1px solid #374151;
+        color: white;
+        border-radius: 10px;
+        padding: 12px 14px;
+    }
+
+        .form-control:focus {
+            background-color: #0b1220;
+            color: white;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15);
+        }
+
+        .form-control:disabled,
+        .form-control[readonly] {
+            background-color: #1f2937;
+            color: #d1d5db;
+            opacity: 1;
+        }
+
+    .btn-save-profile {
+        width: 100%;
+        background-color: #d4af37;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+        .btn-save-profile:hover {
+            background-color: #e6c14a;
+            color: black;
+        }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    .text-success {
+        color: #22c55e !important;
+    }
+
+    .manage-status {
+        text-align: center;
+        margin-bottom: 18px;
+    }
+</style>
+
+<div class="container manage-page">
+    <div class="manage-card">
+
+        <div class="text-center mb-3">
+            <img src="~/images/MS logo.png"
+                 alt="MS Barbershop"
+                 style="height: 70px;" />
+        </div>
+
+        <h2 class="manage-title">My Profile</h2>
+        <p class="manage-subtitle">Manage your account information</p>
+
+        <partial name="_StatusMessage" for="StatusMessage" />
+
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.PhoneNumber" class="form-label">Phone Number</label>
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Enter your phone number" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <button id="update-profile-button" type="submit" class="btn btn-save-profile">
+                Save Changes
+            </button>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} *@

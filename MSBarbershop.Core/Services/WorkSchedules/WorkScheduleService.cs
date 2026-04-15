@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MSBarbershop.Core.IServices;
 using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
-using MSBarbershop.WebApp.Services.WorkSchedules;
 using MSBarbershop.WebApp.ViewModels.WorkSchedule;
 
 public class WorkScheduleService : IWorkScheduleService

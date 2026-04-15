@@ -78,29 +78,27 @@
 </div>
 
 <!-- Services / Features Section -->
-<h2 class="section-title mt-5">OUR SERVICES</h2>
+<h2 class="section-title mt-5 text-center">OUR SERVICES</h2>
 
-<div class="row">
+<div class="row g-4 mt-3">
 
-    @foreach (var service in Model.Services )
+    @foreach (var service in Model.Services)
     {
-        <div class="col-md-4 mb-4">
-            <div class="card bg-dark text-white text-center p-4 h-100">
+        <div class="col-md-4">
+            <div class="why-card service-card h-100 text-center">
 
-                <h3>@service.Name</h3>
+                <div class="why-icon">✂</div>
 
-                <p class="text-muted">
+                <h4 class="why-title">@service.Name</h4>
+
+                <p class="why-text">
                     @service.Description
                 </p>
 
-                <h5 class="fw-bold mt-3">
-                    $@service.Price
-                </h5>
-
-                <h5 class="fw-bold mt-3">
-
-                    @service.DurationMinutes minutes
-                </h5>
+                <div class="service-info mt-3">
+                    <span class="service-price">$@service.Price</span>
+                    <span class="service-duration">@service.DurationMinutes min</span>
+                </div>
 
             </div>
         </div>
@@ -164,25 +162,22 @@
     </div>
 </section>
 
-<h2 class="section-title mt-5">OUR BARBERS</h2>
+<h2 class="section-title mt-5 text-center">OUR BARBERS</h2>
 
-<div class="row justify-content-center" style="max-width: 900px; margin: 0 auto;">
-
+<div class="row justify-content-center g-4" style="max-width: 1000px; margin: 0 auto;">
 
     @foreach (var barber in Model.Barbers)
     {
-        <div class="col-md-4 mb-4">
-
-
-            <div class="card bg-dark text-white text-center p-3 h-100">
+        <div class="col-md-4">
+            <div class="why-card h-100 text-center">
 
                 <img src="@barber.ImageUrl"
                      class="img-fluid rounded mb-3"
-                     style="height:250px; object-fit:cover; object-position: top;" />
+                     style="height:250px; width:100%; object-fit:cover; object-position:center top;" />
 
-                <h4>@barber.FullName</h4>
+                <h4 class="why-title">@barber.FullName</h4>
 
-                <p class="text-muted">
+                <p class="why-text">
                     @barber.Description
                 </p>
 
@@ -196,18 +191,11 @@
                    asp-action="Details"
                    asp-route-id="@barber.Id"
                    class="btn btn-outline-light mt-2">
-                    @barber.FullName's info
+                    More Info
                 </a>
-
             </div>
         </div>
     }
-</div>
-
-<div class="text-center mt-3">
-    <a asp-controller="Home" asp-action="OurBarbers" class="btn btn-gold">
-        View All Barbers
-    </a>
 </div>
 
 
