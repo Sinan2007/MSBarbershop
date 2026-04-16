@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MSBarbershop.Core.IServices;
 using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
 using MSBarbershop.Data.Entities.Enums;
 using MSBarbershop.WebApp.ViewModels.Barber;
 
 
-namespace MSBarbershop.Core.Services.Barbers
+namespace MSBarbershop.Core.Services
 {
     public class BarbersService : IBarberService
     {

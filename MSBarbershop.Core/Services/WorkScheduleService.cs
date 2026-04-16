@@ -22,11 +22,11 @@ public class WorkScheduleService : IWorkScheduleService
     }
 
     public async Task<WorkSchedule?> GetById(int id)
-    {
-        return await _context.WorkSchedules
-            .Include(w => w.Barber)
-            .FirstOrDefaultAsync(w => w.Id == id);
-    }
+{
+    return await _context.WorkSchedules
+        .Include(w => w.Barber)
+        .FirstOrDefaultAsync(w => w.Id == id);
+}
 
     public async Task Create(CreateWorkScheduleViewModel model)
     {

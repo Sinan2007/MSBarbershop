@@ -1,0 +1,124 @@
+﻿@model MSBarbershop.Core.ViewModels.Profile.ProfileViewModel
+
+<style>
+    .manage-page {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 15px;
+    }
+
+    .manage-card {
+        width: 100%;
+        max-width: 560px;
+        background: #111827;
+        border: 1px solid #2a2f3a;
+        border-radius: 18px;
+        padding: 35px 30px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+    }
+
+    .manage-title {
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .manage-subtitle {
+        text-align: center;
+        color: #9ca3af;
+        margin-bottom: 28px;
+    }
+
+    .form-label {
+        color: #f3f4f6;
+        font-weight: 500;
+    }
+
+    .form-control {
+        background-color: #0b1220;
+        border: 1px solid #374151;
+        color: white;
+        border-radius: 10px;
+        padding: 12px 14px;
+    }
+
+        .form-control:focus {
+            background-color: #0b1220;
+            color: white;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15);
+        }
+
+        .form-control[readonly] {
+            background-color: #1f2937;
+            color: #d1d5db;
+            opacity: 1;
+        }
+
+    .btn-save-profile {
+        width: 100%;
+        background-color: #d4af37;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+        .btn-save-profile:hover {
+            background-color: #e6c14a;
+            color: black;
+        }
+</style>
+
+<div class="container manage-page">
+    <div class="manage-card">
+
+        <div class="text-center mb-3">
+            <img src="~/images/MS logo.png" alt="MS Barbershop" style="height: 70px;" />
+        </div>
+
+        <h2 class="manage-title">My Profile</h2>
+        <p class="manage-subtitle">Manage your account information</p>
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="FirstName" class="form-label">First Name</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LastName" class="form-label">Last Name</label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" readonly />
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-save-profile">
+                Save Changes
+            </button>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

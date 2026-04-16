@@ -17,6 +17,7 @@ namespace MSBarbershop.WebApp.ViewModels.Reservation
 
         public TimeOnly Time { get; set; }
 
+        [Phone]
         public string PhoneNumber { get; set; }
         public IEnumerable<SelectListItem> Barbers { get; set; } = new List<SelectListItem>();
         public IEnumerable<SelectListItem> Services { get; set; } = new List<SelectListItem>();

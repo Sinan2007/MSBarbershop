@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MSBarbershop.Core.IServices;
-using MSBarbershop.Core.Services.Barbers;
+using MSBarbershop.Core.Services;
 using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
 using MSBarbershop.WebApp.Seed;
-using MSBarbershop.WebApp.Services.Reservations;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

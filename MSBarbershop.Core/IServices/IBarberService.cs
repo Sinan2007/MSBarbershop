@@ -1,7 +1,7 @@
 ﻿using MSBarbershop.Data.Entities;
 using MSBarbershop.WebApp.ViewModels.Barber;
 
-namespace MSBarbershop.Core.Services.Barbers
+namespace MSBarbershop.Core.IServices
 {
     public interface IBarberService
     {

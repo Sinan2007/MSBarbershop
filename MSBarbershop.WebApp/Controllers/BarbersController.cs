@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MSBarbershop.Core.Services.Barbers;
+using MSBarbershop.Core.IServices;
 using MSBarbershop.WebApp.ViewModels.Barber;
 
 namespace MSBarbershop.WebApp.Controllers

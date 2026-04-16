@@ -4,7 +4,7 @@ using MSBarbershop.Data.Entities;
 using MSBarbershop.Data.Entities.Enums;
 using MSBarbershop.WebApp.ViewModels.Reservation;
 
-namespace MSBarbershop.WebApp.Services.Reservations
+namespace MSBarbershop.Core.Services
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
