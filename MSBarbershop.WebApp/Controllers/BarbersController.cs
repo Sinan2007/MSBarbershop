@@ -5,6 +5,8 @@ using MSBarbershop.WebApp.ViewModels.Barber;
 
 namespace MSBarbershop.WebApp.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class BarbersController : Controller
     {
         private readonly IBarberService _barberService;
@@ -14,7 +16,6 @@ namespace MSBarbershop.WebApp.Controllers
             _barberService = barberService;
         }
 
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var barbers = await _barberService.GetAllBarbers();

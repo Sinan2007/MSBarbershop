@@ -51,15 +51,7 @@ namespace MSBarbershop.WebApp.Controllers
                     }).ToListAsync()
             };
 
-            if (User.IsInRole("Admin"))
-            {
-                model.Users = await _userManager.Users
-                    .Select(u => new SelectListItem
-                    {
-                        Value = u.Id,
-                        Text = u.Email
-                    }).ToListAsync();
-            }
+           
 
             if (id.HasValue)
             {
@@ -84,15 +76,10 @@ namespace MSBarbershop.WebApp.Controllers
 
             TempData["SuccessMessage"] = "Your reservation was created successfully.";
 
-            if (User.IsInRole("Admin") && !string.IsNullOrEmpty(model.UserId))
-            {
-                userId = model.UserId;
-            }
-            else
-            {
+            
                 var user = await _userManager.GetUserAsync(User);
                 userId = user.Id;
-            }
+            
 
             try
             {
@@ -105,8 +92,6 @@ namespace MSBarbershop.WebApp.Controllers
                 return View(model);
             }
 
-            if (User.IsInRole("Admin"))
-                return RedirectToAction(nameof(AllReservations));
 
             return RedirectToAction(nameof(MyReservations));
         }
@@ -231,7 +216,7 @@ namespace MSBarbershop.WebApp.Controllers
         }
 
 
-        [Authorize(Roles = "Admin,Barber")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AllReservations()
         {
 
@@ -253,6 +238,7 @@ namespace MSBarbershop.WebApp.Controllers
             return Json(slots);
         }
 
+        [Authorize(Roles = "Barber")]
         public async Task<IActionResult> BarberDashboard()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
