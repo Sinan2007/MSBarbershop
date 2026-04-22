@@ -156,8 +156,7 @@ namespace MSBarbershop.WebApp.Controllers
             return View(model);
         }
 
-
-        [Authorize(Roles = "Admin,Barber,Customer")]
+        
         [HttpPost]
         public async Task<IActionResult> Cancel(int id)
         {
@@ -189,7 +188,7 @@ namespace MSBarbershop.WebApp.Controllers
                 return RedirectToAction(nameof(AllReservations));
 
             if (User.IsInRole("Barber"))
-                return RedirectToAction(nameof(BarberReservations));
+                return RedirectToAction(nameof(BarberDashboard));
 
             return RedirectToAction(nameof(MyReservations));
         }

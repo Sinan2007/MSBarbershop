@@ -11,7 +11,6 @@
                     </h3>
                     <form asp-action="Edit" method="post">
                         <input type="hidden" asp-for="Id" />
-                        <!-- Barber -->
                         <div class="mb-3">
                             <label asp-for="BarberId" class="form-label">Barber</label>
                             <select asp-for="BarberId"
@@ -20,7 +19,6 @@
                             </select>
                             <span asp-validation-for="BarberId" class="text-danger"></span>
                         </div>
-                        <!-- Service -->
                         <div class="mb-3">
                             <label asp-for="ServiceId" class="form-label">Service</label>
                             <select asp-for="ServiceId"
@@ -29,19 +27,16 @@
                             </select>
                             <span asp-validation-for="ServiceId" class="text-danger"></span>
                         </div>
-                        <!-- Date -->
                         <div class="mb-3">
                             <label asp-for="Date" class="form-label">Date</label>
                             <input asp-for="Date" type="date" class="form-control" min="@DateOnly.FromDateTime(DateTime.Today).ToString("yyyy-MM-dd")" />
                             <span asp-validation-for="Date" class="text-danger"></span>
                         </div>
-                        <!-- Time -->
                         <div class="mb-3">
                             <label asp-for="Time" class="form-label">Time</label>
                             <input asp-for="Time" type="time" class="form-control" />
                             <span asp-validation-for="Time" class="text-danger"></span>
                         </div>
-                        <!-- Buttons -->
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-dark btn-lg">
                                 Save Changes

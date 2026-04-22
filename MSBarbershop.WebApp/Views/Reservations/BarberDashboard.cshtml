@@ -23,7 +23,7 @@
 
     <div class="tab-content">
 
-        <!-- 🔵 UPCOMING -->
+        <!-- UPCOMING -->
         <div class="tab-pane fade show active" id="upcoming">
             <div class="row">
                 @foreach (var r in Model.Upcoming)
@@ -45,7 +45,6 @@
                                     @r.Status
                                 </span>
 
-                                <!-- 🔥 BUTTONS -->
                                 <div class="mt-3">
 
                                     <form asp-action="Complete" method="post" style="display:inline;">
@@ -71,7 +70,7 @@
             </div>
         </div>
 
-        <!-- ⚪ PAST -->
+        <!-- PAST -->
         <div class="tab-pane fade" id="past">
             <div class="row">
                 @foreach (var r in Model.Past)

@@ -16,9 +16,6 @@ namespace MSBarbershop.WebApp.Seed
 
             var context = services.GetRequiredService<ApplicationDbContext>();
 
-           //await context.Database.MigrateAsync();
-
-
             await BarberSeeder.Seed(context,userManager);
             await ServicesSeeder.Seed(context);
             await SchedulesSeeder.Seed(context);
