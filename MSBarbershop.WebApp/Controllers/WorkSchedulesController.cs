@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MSBarbershop.Core.IServices;
+using MSBarbershop.Core.ViewModels.WorkSchedule;
+using MSBarbershop.Data;
 using MSBarbershop.Data.Entities;
 using MSBarbershop.WebApp.ViewModels.WorkSchedule;
 
 public class WorkSchedulesController : Controller
 {
     private readonly IWorkScheduleService _service;
+    private readonly ApplicationDbContext _context;
 
-    public WorkSchedulesController(IWorkScheduleService service)
+    public WorkSchedulesController(IWorkScheduleService service,ApplicationDbContext context)
     {
         _service = service;
+        _context = context;
     }
 
     public async Task<IActionResult> Index()
@@ -52,26 +57,50 @@ public class WorkSchedulesController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Edit(int id)
+    [HttpGet]
+    public async Task<IActionResult> Edit(int? id)
     {
-        var schedule = await _service.GetById(id);
-
-        if (schedule == null)
+        if (id == null)
+        {
             return NotFound();
+        }
 
-        return View(schedule);
+        var workSchedule = await _context.WorkSchedules.FindAsync(id);
+        if (workSchedule == null)
+        {
+            return NotFound();
+        }
+
+        var model = new EditWorkScheduleViewModel
+        {
+            Id = workSchedule.Id,
+            StartTime = workSchedule.StartTime,
+            EndTime = workSchedule.EndTime
+        };
+
+        return View(model);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, WorkSchedule model)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(EditWorkScheduleViewModel model)
     {
-        if (id != model.Id)
-            return NotFound();
-
         if (!ModelState.IsValid)
+        {
             return View(model);
+        }
 
-        await _service.Update(model);
+        var existingSchedule = await _context.WorkSchedules.FindAsync(model.Id);
+
+        if (existingSchedule == null)
+        {
+            return NotFound();
+        }
+
+        existingSchedule.StartTime = model.StartTime;
+        existingSchedule.EndTime = model.EndTime;
+
+        await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
     }
